@@ -5,6 +5,14 @@
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+		},
+		{
+			"path" : "pages/wallpaper/classify/classify",
+			"style" : 
+			{
+				"navigationBarTitleText" : "分类管理\r
+		\t\t"
+			}
 		}
 	],
 	"globalStyle": {
