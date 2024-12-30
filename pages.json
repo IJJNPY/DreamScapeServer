@@ -10,8 +10,14 @@
 			"path" : "pages/wallpaper/classify/classify",
 			"style" : 
 			{
-				"navigationBarTitleText" : "分类管理\r
-		\t\t"
+				"navigationBarTitleText" : "分类管理"
+			}
+		},
+		{
+			"path" : "pages/wallpaper/piclist/piclist",
+			"style" : 
+			{
+				"navigationBarTitleText" : "壁纸列表"
 			}
 		}
 	],
