@@ -104,7 +104,25 @@
 			}
 		}
 		// #endif
-	],
+	,{
+    "path": "pages/dreamscape-classify/add",
+    "style": {
+        "navigationBarTitleText": "新增"
+    }
+}
+,{
+    "path": "pages/dreamscape-classify/edit",
+    "style": {
+        "navigationBarTitleText": "编辑"
+    }
+}
+,{
+    "path": "pages/dreamscape-classify/list",
+    "style": {
+        "navigationBarTitleText": "列表"
+    }
+}
+],
 	"subPackages": [{
 			"root": "uni_modules/uni-feedback",
 			"pages": [{

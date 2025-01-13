@@ -16,7 +16,7 @@ module.exports = {
 	 */
 	
 	getClassList: async function(pageNum=1, pageSize=10) {
-		// 参数校验，如无参数则不需要
+		// 参数校验，如无参数则不需要 
 		try {
 			// 计算偏移量
 			const skip = (pageNum - 1) * pageSize;
@@ -56,23 +56,23 @@ module.exports = {
 		}
 	},
 	
-	editClassList: async function() {
-		try{
-			let res = ds_classify.doc(???).update(value);
+	// editClassList: async function() {
+	// 	try{
+	// 		let res = ds_classify.doc(???).update(value);
 			
-			// 返回结果
-			return {
-				errCode: 0,
-				errMsg: '修改成功',
-				data: res.data
-			};
-		} catch (e) {
-			return {
-				errCode: -1,
-				errMsg: '修改失败:' + e.message
-			};
-		}
-	}
+	// 		// 返回结果
+	// 		return {
+	// 			errCode: 0,
+	// 			errMsg: '修改成功',
+	// 			data: res.data
+	// 		};
+	// 	} catch (e) {
+	// 		return {
+	// 			errCode: -1,
+	// 			errMsg: '修改失败:' + e.message
+	// 		};
+	// 	}
+	// }
 	
 }
 

@@ -12,11 +12,19 @@
 		"_id": {
 			"description": "ID，系统自动生成"
 		},
+		"sort":{
+			"title": "排序",
+			"bsonType": "int"
+		},
+		"picurl":{
+			"title": "分类封面",
+			"bsonType": "string"
+		},
 		"name":{
 			"title": "分类名称",
 			"bsonType": "string"
 		},
-		"status":{
+		"select":{
 			"title": "状态",
 			"bsonType": "bool",
 			"defaultValue":false
@@ -24,7 +32,14 @@
 		"createTime":{
 			"title": "创建时间",
 			"bsonType": "timestamp",
-			"forceDefaultValue":{
+			"DefaultValue":{
+				"$env": "now"
+			}
+		},
+		"updateTime":{
+			"title": "更新时间",
+			"bsonType": "timestamp",
+			"DefaultValue":{
 				"$env": "now"
 			}
 		}
