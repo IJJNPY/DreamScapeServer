@@ -1,288 +1,514 @@
 {
-	"pages": [{
-			"path": "pages/list/list",
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index"
+		},
+		{
+			"path": "pages/demo/icons/icons",
 			"style": {
-				// #ifndef APP
-				"enablePullDownRefresh": true,
-				// #endif
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "图标"
 			}
 		},
 		{
-			"path": "pages/grid/grid",
+			"path": "pages/demo/table/table",
 			"style": {
-				//#ifndef MP
-				"navigationStyle": "custom"
-				//#endif
+				"navigationBarTitleText": "表格"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/login/login-withpwd",
+			"style": {
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/error/404",
+			"style": {
+				"navigationBarTitleText": "Not Found"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/userinfo/change_pwd/change_pwd",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "uni_modules/uni-upgrade-center/pages/version/list",
+			"style": {
+				"navigationBarTitleText": "版本列表"
+			}
+		},
+		{
+			"path": "uni_modules/uni-upgrade-center/pages/version/add",
+			"style": {
+				"navigationBarTitleText": "新版发布"
+			}
+		},
+		{
+			"path": "uni_modules/uni-upgrade-center/pages/version/detail",
+			"style": {
+				"navigationBarTitleText": "版本信息查看"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/userinfo/deactivate/deactivate",
+			"style": {
+				"navigationBarTitleText": "注销账号"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/userinfo/userinfo",
+			"style": {
+				"navigationBarTitleText": "个人资料"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/userinfo/bind-mobile/bind-mobile",
+			"style": {
+				"navigationBarTitleText": "绑定手机号码"
 			}
 		}, {
-			"path": "pages/list/search/search",
+			"path": "uni_modules/uni-id-pages/pages/userinfo/cropImage/cropImage",
 			"style": {
-				"navigationBarTitleText": "搜索"
-			}
-		}, {
-			"path": "pages/list/detail",
-			"style": {
-				"app-plus": {
-					"titleNView": {
-						"buttons": [{
-							"type": "share"
-						}],
-						"type": "transparent"
-					}
-				},
-				"h5": {
-					"titleNView": {
-						"type": "transparent"
-					}
-				},
-				"navigationBarTitleText": "文章详情"
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path": "pages/ucenter/ucenter",
+			"path": "uni_modules/uni-id-pages/pages/login/login-smscode",
 			"style": {
-				"navigationStyle": "custom"
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "手机验证码登录"
 			}
 		},
 		{
-			"path": "pages/uni-agree/uni-agree",
+			"path": "uni_modules/uni-id-pages/pages/login/login-withoutpwd",
 			"style": {
-				"navigationStyle": "custom",
-				"app-plus": {
-					"popGesture": "none"
-				}
-			}
-		}, {
-			"path": "pages/ucenter/settings/settings",
-			"style": {
-				"navigationBarTitleText": "设置"
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "免密登录页"
 			}
 		},
 		{
-			"path": "pages/ucenter/read-news-log/read-news-log",
+			"path": "uni_modules/uni-id-pages/pages/register/register",
 			"style": {
-				"navigationBarTitleText": "阅读记录",
-				"enablePullDownRefresh": true
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/register/register-admin",
+			"style": {
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "创建超级管理员"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/register/register-by-email",
+			"style": {
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "邮箱验证码注册"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/retrieve/retrieve",
+			"style": {
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/retrieve/retrieve-by-email",
+			"style": {
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "通过邮箱重置密码"
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/common/webview/webview",
+			"style": {
+				"topWindow": false,
+				"leftWindow": false,
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "uni_modules/uni-id-pages/pages/userinfo/set-pwd/set-pwd",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "设置密码"
 			}
 		}
-		// #ifdef APP
-		, {
-			"path": "pages/ucenter/about/about",
-			"style": {
-				"navigationBarTitleText": "关于",
-				"app-plus": {
-					"titleNView": {
-						"buttons": [{
-							"type": "share"
-						}]
-					}
-				}
-			}
-		},
-		{
-			"path": "uni_modules/uni-upgrade-center-app/pages/upgrade-popup",
-			"style": {
-				"disableScroll": true,
-				"app-plus": {
-					"backgroundColorTop": "transparent",
-					"background": "transparent",
-					"titleNView": false,
-					"scrollIndicator": false,
-					"popGesture": "none",
-					"animationType": "fade-in",
-					"animationDuration": 200
-
-				}
-			}
-		},
-		{
-			"path": "pages/ucenter/invite/invite",
-			"style": {
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
-			}
-		}
-		// #endif
 	,{
-    "path": "pages/dreamscape-classify/add",
+    "path": "uni_modules/uni-id-pages/pages/userinfo/realname-verify/realname-verify",
     "style": {
-        "navigationBarTitleText": "新增"
+        "enablePullDownRefresh": false,
+        "navigationBarTitleText": "实名认证"
     }
-}
-,{
-    "path": "pages/dreamscape-classify/edit",
-    "style": {
-        "navigationBarTitleText": "编辑"
-    }
-}
-,{
-    "path": "pages/dreamscape-classify/list",
-    "style": {
-        "navigationBarTitleText": "列表"
-    }
+},
+{
+	"path" : "pages/wallpaper/classify",
+	"style" : 
+	{
+		"navigationBarTitleText" : "分类"
+	}
 }
 ],
 	"subPackages": [{
-			"root": "uni_modules/uni-feedback",
+			"root": "pages/system",
 			"pages": [{
-				"path": "pages/opendb-feedback/opendb-feedback",
-				"style": {
-					"navigationBarTitleText": "意见反馈",
-					"enablePullDownRefresh": false
+					"path": "menu/list",
+					"style": {
+						"navigationBarTitleText": "菜单管理"
+					}
+				},
+				{
+					"path": "menu/add",
+					"style": {
+						"navigationBarTitleText": "新增菜单",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "menu/edit",
+					"style": {
+						"navigationBarTitleText": "修改菜单",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "permission/list",
+					"style": {
+						"navigationBarTitleText": "权限管理"
+					}
+				},
+				{
+					"path": "permission/add",
+					"style": {
+						"navigationBarTitleText": "新增权限",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "permission/edit",
+					"style": {
+						"navigationBarTitleText": "修改权限",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "role/add",
+					"style": {
+						"navigationBarTitleText": "新增角色",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "role/edit",
+					"style": {
+						"navigationBarTitleText": "修改角色",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "role/list",
+					"style": {
+						"navigationBarTitleText": "角色管理"
+					}
+				},
+				{
+					"path": "user/add",
+					"style": {
+						"navigationBarTitleText": "新增用户",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "user/edit",
+					"style": {
+						"navigationBarTitleText": "修改用户",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "user/list",
+					"style": {
+						"navigationBarTitleText": "用户管理"
+					}
+				},
+				{
+					"path": "app/add",
+					"style": {
+						"navigationBarTitleText": "新增应用",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "app/list",
+					"style": {
+						"navigationBarTitleText": "应用管理"
+					}
+				},
+				{
+					"path": "app/uni-portal/uni-portal",
+					"style": {
+						"navigationBarTitleText": "发布页管理",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "tag/add",
+					"style": {
+						"navigationBarTitleText": "新增标签"
+					}
+				},
+				{
+					"path": "tag/edit",
+					"style": {
+						"navigationBarTitleText": "修改标签"
+					}
+				},
+				{
+					"path": "tag/list",
+					"style": {
+						"navigationBarTitleText": "标签管理"
+					}
+				},
+				{
+					"path": "safety/list",
+					"style": {
+						"navigationBarTitleText": "用户日志"
+					}
 				}
-			}]
+			]
 		},
 		{
-			"root": "uni_modules/uni-id-pages/pages",
+			"root": "pages/uni-stat",
 			"pages": [{
-					"path": "userinfo/userinfo",
+					"path": "page-res/page-res",
 					"style": {
-						"navigationBarTitleText": "个人资料"
+						"navigationBarTitleText": "受访页",
+						"enablePullDownRefresh": false
 					}
 				},
 				{
-					"path": "userinfo/realname-verify/realname-verify",
+					"path": "page-ent/page-ent",
 					"style": {
-						"enablePullDownRefresh": false,
-						"navigationBarTitleText": "实名认证"
+						"navigationBarTitleText": "入口页",
+						"enablePullDownRefresh": false
 					}
 				},
 				{
-					"path": "login/login-withoutpwd"
-				},
-				{
-					"path": "login/login-withpwd"
-				},
-				{
-					"path": "userinfo/deactivate/deactivate",
+					"path": "page-content/page-content",
 					"style": {
-						"navigationBarTitleText": "注销账号"
+						"navigationBarTitleText": "内容统计",
+						"enablePullDownRefresh": false
 					}
 				},
 				{
-					"path": "userinfo/bind-mobile/bind-mobile",
+					"path": "page-rule/page-rule",
 					"style": {
-						"navigationBarTitleText": "绑定手机号码"
+						"navigationBarTitleText": "页面规则",
+						"enablePullDownRefresh": false
 					}
 				},
 				{
-					"path": "login/login-smscode",
+					"path": "scene/scene",
 					"style": {
-						"navigationBarTitleText": "手机验证码登录"
+						"navigationBarTitleText": "场景值（小程序）",
+						"enablePullDownRefresh": false
 					}
 				},
 				{
-					"path": "register/register",
+					"path": "channel/channel",
 					"style": {
-						"navigationBarTitleText": "注册"
+						"navigationBarTitleText": "渠道（app）",
+						"enablePullDownRefresh": false
 					}
 				},
+				// #ifndef MP || APP
 				{
-					"path": "retrieve/retrieve",
+					"path": "error/js/js",
 					"style": {
-						"navigationBarTitleText": "重置密码"
-					}
-				}, {
-					"path": "common/webview/webview",
-					"style": {
-						"enablePullDownRefresh": false,
-						"navigationBarTitleText": ""
-					}
-				}, {
-					"path": "userinfo/change_pwd/change_pwd",
-					"style": {
-						"enablePullDownRefresh": false,
-						"navigationBarTitleText": "修改密码"
-					}
-				}, {
-					"path": "register/register-by-email",
-					"style": {
-						"navigationBarTitleText": "邮箱验证码注册"
-					}
-				}, {
-					"path": "retrieve/retrieve-by-email",
-					"style": {
-						"navigationBarTitleText": "通过邮箱重置密码"
+						"navigationBarTitleText": "js报错统计",
+						"enablePullDownRefresh": false
 					}
 				},
-				{
-					"path": "userinfo/set-pwd/set-pwd",
-					"style": {
-						"enablePullDownRefresh": false,
-						"navigationBarTitleText": "设置密码"
-					}
-				}
-				// #ifdef H5
-				,
-				{
-					"path": "userinfo/cropImage/cropImage"
-				},
-				{
-					"path": "register/register-admin",
-					"style": {
-						"enablePullDownRefresh": false,
-						"navigationBarTitleText": "注册管理员账号"
-					}
-				}
 				// #endif
+				{
+					"path": "error/js/detail",
+					"style": {
+						"navigationBarTitleText": "错误信息",
+						"navigationStyle": "default",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "error/app/app",
+					"style": {
+						"navigationBarTitleText": "app原生报错统计",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "event/event",
+					"style": {
+						"navigationBarTitleText": "事件和转化",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "device/overview/overview",
+					"style": {
+						"navigationBarTitleText": "今日概况",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "device/activity/activity",
+					"style": {
+						"navigationBarTitleText": "活跃度",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "device/trend/trend",
+					"style": {
+						"navigationBarTitleText": "趋势分析",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "device/retention/retention",
+					"style": {
+						"navigationBarTitleText": "留存",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "device/comparison/comparison",
+					"style": {
+						"navigationBarTitleText": "平台对比",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "device/stickiness/stickiness",
+					"style": {
+						"navigationBarTitleText": "粘性",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "user/overview/overview",
+					"style": {
+						"navigationBarTitleText": "今日概况",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "user/activity/activity",
+					"style": {
+						"navigationBarTitleText": "活跃度",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "user/trend/trend",
+					"style": {
+						"navigationBarTitleText": "趋势分析",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "user/retention/retention",
+					"style": {
+						"navigationBarTitleText": "留存",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "user/comparison/comparison",
+					"style": {
+						"navigationBarTitleText": "平台对比",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "user/stickiness/stickiness",
+					"style": {
+						"navigationBarTitleText": "粘性",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "pay-order/overview/overview",
+					"style": {
+						"navigationBarTitleText": "订单概况",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "pay-order/list/list",
+					"style": {
+						"navigationBarTitleText": "订单明细",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "pay-order/funnel/funnel",
+					"style": {
+						"navigationBarTitleText": "漏斗分析",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "pay-order/ranking/ranking",
+					"style": {
+						"navigationBarTitleText": "用户价值排行",
+						"enablePullDownRefresh": false
+					}
+				}
 			]
 		}
 	],
 	"globalStyle": {
-		// #ifdef H5
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "管理系统",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
 		"h5": {
 			"titleNView": false
+		}
+	},
+	"topWindow": {
+		"path": "windows/topWindow",
+		"style": {
+			"height": "60px"
 		},
-		// #endif
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-starter",
-		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#F8F8F8",
-		"enablePullDownRefresh": false,
-		// "maxWidth":375,
-		"rpxCalcMaxDeviceWidth": 375,
-		"rpxCalcBaseDeviceWidth": 375
-		// "rpxCalcIncludeWidth":0
+		"matchMedia": {
+			"minWidth": 0
+		}
 	},
-	"condition": {
-		"list": [{
-				"path": "pages/list/detail"
-			}, {
-				"path": "pages/list/list"
-			},
-			{
-				"path": "pages/ucenter/settings/settings"
-			}
-		],
-		"current": 1
-	},
-	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#007AFF",
-		"borderStyle": "black",
-		"backgroundColor": "#FFFFFF",
-		"list": [{
-			"pagePath": "pages/list/list",
-			"iconPath": "static/tabbar/list.png",
-			"selectedIconPath": "static/tabbar/list_active.png",
-			"text": "列表"
-		}, {
-			"pagePath": "pages/grid/grid",
-			"iconPath": "static/tabbar/grid.png",
-			"selectedIconPath": "static/tabbar/grid_active.png",
-			"text": "宫格"
-		}, {
-			"pagePath": "pages/ucenter/ucenter",
-			"iconPath": "static/tabbar/me.png",
-			"selectedIconPath": "static/tabbar/me_active.png",
-			"text": "我的"
-		}]
+	"leftWindow": {
+		"path": "windows/leftWindow",
+		"style": {
+			"width": "240px"
+		}
 	},
 	"uniIdRouter": {
-		"loginPage": "uni_modules/uni-id-pages/pages/login/login-withoutpwd",
+		"loginPage": "uni_modules/uni-id-pages/pages/login/login-withpwd",
 		"needLogin": [
-			"/uni_modules/uni-id-pages/pages/userinfo/userinfo"
+			"^((?!uni-id-pages\/pages\/login|register|retrieve).)*$"
 		],
 		"resToLogin": true
 	}

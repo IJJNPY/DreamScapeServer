@@ -3,8 +3,9 @@ import {
 	enumConverter
 } from '@/js_sdk/validator/opendb-app-versions.js';
 
-const platform_iOS = 'iOS';
-const platform_Android = 'Android';
+export const platform_iOS = 'iOS';
+export const platform_Android = 'Android';
+export const platform_Harmony = 'Harmony'
 const db = uniCloud.database();
 
 function getValidator(fields) {
@@ -23,7 +24,7 @@ export const fields =
 export default {
 	data() {
 		return {
-			labelWidth: '80px',
+			labelWidth: '100px',
 			enableiOSWgt: true, // 是否开启iOS的wgt更新
 			silentlyContent: '静默更新：App升级时会在后台下载wgt包并自行安装。新功能在下次启动App时生效',
 			mandatoryContent: '强制更新：App升级弹出框不可取消',
@@ -51,16 +52,22 @@ export default {
 				"create_date": null
 			},
 			formOptions: {
-				"platform_localdata": [{
+				"platform_localdata": [
+					{
 						"value": "Android",
 						"text": "安卓"
 					},
 					{
 						"value": "iOS",
 						"text": "苹果"
+					},
+					{
+						"value": "Harmony",
+						"text": "鸿蒙 Next"
 					}
 				],
-				"type_localdata": [{
+				"type_localdata": [
+					{
 						"value": "native_app",
 						"text": "原生App安装包"
 					},
@@ -86,8 +93,17 @@ export default {
 		isWGT() {
 			return this.formData.type === 'wgt'
 		},
+		isNativeApp() {
+			return this.formData.type === 'native_app'
+		},
 		isiOS() {
-			return !this.isWGT ? this.formData.platform.includes(platform_iOS) : false;
+			return this.formData.platform.includes(platform_iOS);
+		},
+		isAndroid() {
+			return this.formData.platform.includes(platform_Android)
+		},
+		isHarmony() {
+			return this.formData.platform.includes(platform_Harmony)
 		},
 		hasPackage() {
 			return this.appFileList && !!Object.keys(this.appFileList).length
@@ -97,10 +113,24 @@ export default {
 		},
 		platformLocaldata() {
 			return !this.isWGT ? this.formOptions.platform_localdata : this.enableiOSWgt ? this.formOptions
-				.platform_localdata : [this.formOptions.platform_localdata[0]]
+				.platform_localdata : [this.formOptions.platform_localdata[0], this.formOptions.platform_localdata[2]]
 		},
 		uni_platform() {
-			return (this.isiOS ? platform_iOS : platform_Android).toLocaleLowerCase()
+			if (this.isiOS) return platform_iOS.toLocaleLowerCase()
+			else if (this.isAndroid) return platform_Android.toLocaleLowerCase()
+			return platform_Harmony.toLocaleLowerCase()
+		},
+		enableUploadPackage() {
+			return this.isWGT || !(this.isiOS || this.isHarmony)
+		},
+		urlLabel() {
+			if (this.isWGT || this.isAndroid) return '下载链接'
+			if (this.isiOS) return 'AppStore'
+			else if (this.isHarmony) return '应用商店'
+		},
+		isApk() {
+			const apkIndex = this.formData.url.indexOf('apk')
+			return this.formData.url && (apkIndex > -1 && apkIndex === this.formData.url.length - 3)
 		}
 	},
 	methods: {
@@ -112,7 +142,7 @@ export default {
 				.get()
 				.then(res => {
 					const data = res.result.data[0]
-					return data.store_list || []
+					return data ? data.store_list || [] : []
 				})
 		},
 		packageUploadSuccess(res) {
@@ -133,16 +163,14 @@ export default {
 		},
 		async packageDelete(res) {
 			if (!this.hasPackage) return;
-			let [deleteRes] = await this.deleteFile([res.tempFilePath])
-			if (deleteRes.success) {
-				uni.showToast({
-					icon: 'success',
-					title: '删除成功',
-					duration: 800
-				})
-				this.formData.url = this.preUrl
-				this.$refs.form.clearValidate('url')
-			}
+			await this.deleteFile([res.tempFilePath])
+			uni.showToast({
+				icon: 'success',
+				title: '删除成功',
+				duration: 800
+			})
+			this.formData.url = this.preUrl
+			this.$refs.form.clearValidate('url')
 		},
 		selectFile() {
 			if (this.hasPackage) {
@@ -181,6 +209,30 @@ export default {
 				uni_platform: uni_platform ? uni_platform : this.uni_platform,
 				create_env: 'uni-stat',
 				stable_publish: false
+			}
+		},
+		toUrl(url){
+			// #ifdef H5
+			window.open(url);
+			// #endif
+			// #ifndef H5
+			uni.showToast({
+				title: '请在浏览器中打开',
+				icon: 'none'
+			});
+			// #endif
+		},
+		getCloudStorageConfig(){
+			return uni.getStorageSync('uni-admin-cloud-storage-config') || {};
+		},
+		setCloudStorageConfig(data={}){
+			uni.setStorageSync('uni-admin-cloud-storage-config', data);
+		},
+		// 临时方法，后面会优化
+		setCloudStorage(data){
+			// uniCloud.setCloudStorage 不是标准的API，临时挂载在uniCloud对象上的，后面会优化
+			if (typeof uniCloud.setCloudStorage === "function") {
+				uniCloud.setCloudStorage(data);
 			}
 		}
 	}

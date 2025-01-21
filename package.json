@@ -1,19 +1,30 @@
 {
-	"id": "uni-starter",
-	"displayName": "uni-starter",
-	"version": "2.2.3",
-	"description": "云端一体应用快速开发基本项目模版",
-	"keywords": [
-        "login",
-        "登录",
-        "搜索",
-        "uni-id实例",
-        "留言板"
-    ],
-	"repository": "https://gitcode.net/dcloud/uni-starter",
-	"engines": {
-		"HBuilderX": "^3.2.6"
+	"name": "uni-admin 基础框架（原名 uniCloud admin）",
+	"id": "uni-template-admin",
+	"displayName": "uni-admin 基础框架",
+	"version": "2.4.25",
+	"description": "基于uni-app & uniCloud的后台管理项目模板（管理后台开发必备神器）",
+	"main": "main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"repository": "https://github.com/dcloudio/uni-admin.git",
+	"keywords": [
+        "admin",
+        "uniCloud",
+        "管理后台",
+        "云后台",
+        "uni-admin"
+    ],
+	"engines": {
+		"HBuilderX": "^3.6.0"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/dcloudio/uni-admin/issues"
+	},
+	"homepage": "https://github.com/dcloudio/uni-admin#readme",
 	"dcloudext": {
 		"sale": {
 			"regular": {
@@ -35,42 +46,40 @@
 		"type": "unicloud-template-project"
 	},
 	"uni_modules": {
-		"dependencies": [
-			"uni-id-pages"
-		],
+		"dependencies": [],
 		"encrypt": [],
 		"platforms": {
 			"cloud": {
 				"tcb": "y",
-                "aliyun": "y",
-                "alipay": "y"
+				"aliyun": "y",
+				"alipay": "y"
 			},
 			"client": {
 				"App": {
                     "app-vue": "y",
-                    "app-nvue": "u",
-                    "app-harmony": "u",
-                    "app-uvue": "u"
+                    "app-nvue": "y",
+                    "app-uvue": "n",
+                    "app-harmony": "u"
                 },
 				"H5-mobile": {
-					"Safari": "u",
-					"Android Browser": "u",
-					"微信浏览器(Android)": "u",
-					"QQ浏览器(Android)": "u"
+					"Safari": "y",
+					"Android Browser": "y",
+					"微信浏览器(Android)": "y",
+					"QQ浏览器(Android)": "y"
 				},
 				"H5-pc": {
 					"Chrome": "y",
 					"IE": "n",
-					"Edge": "u",
-					"Firefox": "u",
-					"Safari": "u"
+					"Edge": "y",
+					"Firefox": "y",
+					"Safari": "y"
 				},
 				"小程序": {
 					"微信": "y",
-					"阿里": "u",
-					"百度": "u",
-					"字节跳动": "u",
-					"QQ": "u",
+					"阿里": "y",
+					"百度": "y",
+					"字节跳动": "y",
+					"QQ": "y",
 					"京东": "u"
 				},
 				"快应用": {
@@ -83,8 +92,5 @@
 				}
 			}
 		}
-	},
-	"dependencies": {
-		"qrcodejs2": "^0.0.2"
 	}
 }

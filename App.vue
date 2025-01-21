@@ -1,56 +1,95 @@
 <script>
-	import initApp from '@/common/appInit.js';
-	import openApp from '@/common/openApp.js';
-	// #ifdef H5
-		openApp() //创建在h5端全局悬浮引导用户下载app的功能
-	// #endif
-	import checkIsAgree from '@/pages/uni-agree/utils/uni-agree.js';
-	import uniIdPageInit from '@/uni_modules/uni-id-pages/init.js';
+	import {
+		mapActions,
+		mapMutations
+	} from 'vuex'
+	import config from '@/admin.config.js'
+	import {
+		version
+	} from './package.json'
+	import { uniAdminCacheKey } from './store/constants.js'
+	import uploadFileForExtStorage from "@/js_sdk/ext-storage/uploadFileForExtStorage.js"
 	export default {
-		globalData: {
-			searchText: '',
-			appVersion: {},
-			config: {},
-			$i18n: {},
-			$t: {}
+		created() {
+			this.clear = undefined
+		},
+		methods: {
+			...mapMutations('app', ['SET_THEME']),
+			...mapActions({
+				init: 'app/init'
+			}),
+			clearPlatform() {
+				const keysOfPlatform = uni.getStorageInfoSync().keys.filter(key => key.indexOf('platform') > -1)
+				keysOfPlatform.length && keysOfPlatform.forEach(key => uni.removeStorageSync(key))
+			}
+		},
+		onPageNotFound(msg) {
+			uni.redirectTo({
+				url: config.error.url
+			})
 		},
 		onLaunch: function() {
-			console.log('App Launch')
-			this.globalData.$i18n = this.$i18n
-			this.globalData.$t = str => this.$t(str)
-			initApp();
-			uniIdPageInit()
-			
-			// #ifdef APP
-			//checkIsAgree(); APP端暂时先用原生默认生成的。目前，自定义方式启动vue界面时，原生层已经请求了部分权限这并不符合国家的法规
-			// #endif
-
 			// #ifdef H5
-			// checkIsAgree(); // 默认不开启。目前全球，仅欧盟国家有网页端同意隐私权限的需要。如果需要可以自己去掉注视后生效
+			console.log(
+				`%c uni-admin %c v${version} `,
+				'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+				'background:#007aff ;padding: 1px; border-radius: 0 3px 3px 0;  color: #fff; font-weight: bold;'
+			)
 			// #endif
-
-			// #ifdef APP-PLUS
-			//idfa有需要的用户在应用首次启动时自己获取存储到storage中
-			/*var idfa = '';
-			var manager = plus.ios.invoke('ASIdentifierManager', 'sharedManager');
-			if(plus.ios.invoke(manager, 'isAdvertisingTrackingEnabled')){
-				var identifier = plus.ios.invoke(manager, 'advertisingIdentifier');
-				idfa = plus.ios.invoke(identifier, 'UUIDString');
-				plus.ios.deleteObject(identifier);
+			// #ifdef H5
+			// 此处为强制用户必须登录才能访问其他页面，如果需要部分页面不登录也能访问，需要在此过滤这些页面不执行下面的代码或直接注释掉此代码
+			// let uni_id_token_expired = uni.getStorageSync("uni_id_token_expired");
+			// if (!uni_id_token_expired || uni_id_token_expired < Date.now()) {
+			// 	uni.reLaunch({
+			// 		url: config.login.url
+			// 	})
+			// }
+			// #endif
+			// 线上示例使用
+			// console.log('%c uni-app官方团队诚邀优秀前端工程师加盟，一起打造更卓越的uni-app & uniCloud，欢迎投递简历到 hr2013@dcloud.io', 'color: red');
+			console.log('App Launch')
+			if (this.$uniIdPagesStore.store.hasLogin) {
+				this.init()
 			}
-			plus.ios.deleteObject(manager);
-			console.log('idfa = '+idfa);*/
-			// #endif
+
+			// 登录成功回调
+			uni.$on('uni-id-pages-login-success', () => {
+				this.init()
+			})
+
+			// theme
+			this.SET_THEME(uni.getStorageSync(uniAdminCacheKey.theme) || 'default')
+
+			// 设置 uniCloud.uploadFile 默认上传的云存储供应商
+			uploadFileForExtStorage.init({
+				provider: "unicloud", // provider代表默认上传到哪，可选项 "unicloud" 内置存储; "extStorage" 扩展存储;
+				domain: "cdn.example.com", //【重要】这里需要改成你开通扩展存储时绑定的自定义域名）
+				fileID2fileURL: true, // 将fileID转成fileURL，方便兼容老项目
+				// 获取上传参数的函数
+				uploadFileOptions: async (event) => {
+					// ext-storage-co 是你自己写的云对象，参考代码：https://doc.dcloud.net.cn/uniCloud/ext-storage/dev.html#getuploadfileoptions
+					const uniCloudStorageExtCo = uniCloud.importObject("ext-storage-co");
+					return await uniCloudStorageExtCo.getUploadFileOptions(event);
+				}
+			});
 		},
 		onShow: function() {
 			console.log('App Show')
+			this.clear = setInterval(() => this.clearPlatform(), 15 * 60 * 1000)
 		},
 		onHide: function() {
 			console.log('App Hide')
+			this.clear && clearInterval(this.clear)
 		}
 	}
 </script>
 
-<style>
-	/*每个页面公共css */
+<style lang="scss">
+	@import '@/common/uni.css';
+	@import '@/common/uni-icons.css';
+	@import '@/common/admin-icons.css';
+	@import '@/common/theme.scss';
+	@import '@/common/custom.scss';
+	@import 'https://unpkg.com/element-ui/lib/theme-chalk/index.css';
+	@import 'https://unpkg.com/@element-plus/icons-vue';
 </style>

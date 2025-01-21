@@ -21,7 +21,7 @@
 			<text class="tip">未注册的账号验证通过后将自动注册</text>
 			<view class="phone-box">
 				<view @click="chooseArea" class="area">+86</view>
-				<uni-easyinput trim="both" :focus="focusPhone" @blur="focusPhone = false" class="input-box" type="number"
+				<uni-easyinput :focus="focusPhone" @blur="focusPhone = false" class="input-box" type="number"
 					:inputBorder="false" v-model="phone" maxlength="11" placeholder="请输入手机号" />
 			</view>
 			<uni-id-pages-agreements scope="register" ref="agreements"></uni-id-pages-agreements>
@@ -81,7 +81,7 @@
 		onShow() {
 			// #ifdef H5
 			document.onkeydown = event => {
-				var e = event || window.event;
+				let e = event || window.event;
 				if (e && e.keyCode == 13) { //回车键的键值为13
 					this.toSmsPage()
 				}
@@ -94,31 +94,15 @@
 		onReady() {
 			// 是否优先启动一键登录。即：页面一加载就启动一键登录
 			//#ifdef APP-PLUS
-			if (config.loginTypes.includes('univerify') && this.type == "univerify") {
-				uni.preLogin({
-					provider: 'univerify',
-					success: () => {
-						const pages = getCurrentPages();
-						currentWebview = pages[pages.length - 1].$getAppWebview();
-						currentWebview.setStyle({
-							"top": "2000px" // 隐藏当前页面窗体
-						})
-						// this.type == this.loginTypes[1]
-						// console.log('开始一键登录');
-						this.$refs.uniFabLogin.login_before('univerify')
-					},
-					fail: (err) => {
-						console.log(err);
-						if (config.loginTypes.length > 1) {
-							this.$refs.uniFabLogin.login_before(config.loginTypes[1])
-						} else {
-							uni.showModal({
-								content: err.message,
-								showCancel: false
-							});
-						}
-					}
+			if (this.type == "univerify") {
+				const pages = getCurrentPages();
+				currentWebview = pages[pages.length - 1].$getAppWebview();
+				currentWebview.setStyle({
+					"top": "2000px" // 隐藏当前页面窗体
 				})
+				this.type == this.loginTypes[1]
+				// console.log('开始一键登录');
+				this.$refs.uniFabLogin.login_before('univerify')
 			}
 			//#endif
 		},

@@ -464,16 +464,9 @@
 					this.isPhone = navigator.userAgent.toLowerCase().indexOf('mobile') !== -1
 					return
 				}
-				// #ifdef MP-WEIXIN
-				const {
-					windowWidth
-				} = uni.getWindowInfo()
-				// #endif
-				// #ifndef MP-WEIXIN
 				const {
 					windowWidth
 				} = uni.getSystemInfoSync()
-				// #endif
 				this.isPhone = windowWidth <= 500
 				this.windowWidth = windowWidth
 			},
@@ -705,11 +698,11 @@
 						startString = getDateTime(this.start, this.hideSecond)
 					}
 					[startDate, startTime] = startString.split(' ')
-					if (this.start && !dateCompare(this.start, `${this.tempRange.startDate} ${this.tempRange.startTime}`)) {
+					if (this.start && !dateCompare(this.start, this.tempRange.startDate)) {
 						startDateLaterRangeStartDate = true
 						this.tempRange.startDate = startDate
 					}
-					if (this.start && !dateCompare(this.start, `${this.tempRange.endDate} ${this.tempRange.endTime}`)) {
+					if (this.start && !dateCompare(this.start, this.tempRange.endDate)) {
 						startDateLaterRangeEndDate = true
 						this.tempRange.endDate = startDate
 					}
@@ -724,11 +717,11 @@
 					}
 					[endDate, endTime] = endString.split(' ')
 
-					if (this.end && !dateCompare(`${this.tempRange.startDate} ${this.tempRange.startTime}`, this.end)) {
+					if (this.end && !dateCompare(this.tempRange.startDate, this.end)) {
 						endDateEarlierRangeStartDate = true
 						this.tempRange.startDate = endDate
 					}
-					if (this.end && !dateCompare(`${this.tempRange.endDate} ${this.tempRange.endTime}`, this.end)) {
+					if (this.end && !dateCompare(this.tempRange.endDate, this.end)) {
 						endDateEarlierRangeEndDate = true
 						this.tempRange.endDate = endDate
 					}
