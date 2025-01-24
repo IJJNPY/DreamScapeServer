@@ -15,5 +15,11 @@ module.exports = {
 			clientInfo:this.getClientInfo()
 		})
 		return await dbJQL.collection("wallpaper-classify").orderBy("sort asc").get();
+	},
+	async remove(ids = []){
+		const dbJQL = uniCloud.databaseForJQL({
+			clientInfo:this.getClientInfo()
+		})
+		return await dbJQL.collection("wallpaper-classify").where(`_id in ${JSON.stringify(ids)}`).remove()
 	}
 }

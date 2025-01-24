@@ -49,6 +49,7 @@ import dayjs from "dayjs";
 import { cloudToHttps, compressImage } from "@/utils/tools.js"
 import { showToast } from '../../../utils/common';
 
+const emits = defineEmits(["addsuccess"]);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify",{customUI:true});
 const fromRef = ref(null);
 const classifyPopup = ref(null);
@@ -89,17 +90,16 @@ const submit = async() =>{
 		let params = {...formData.value};
 		delete params.tempurl;
 		
-		let res = await classifyCloudObj.add(params);
 		let {errCode,errMsg} = await classifyCloudObj.add(params);
 		if(errCode!=0){
 			return showToast({title:errMsg});
 		}
 		showToast({title:"添加成功"});
-		close();
+		classifyCancel();
 		init();
-		emits("success",{msg:"添加成功~~"})
+		emits("addsuccess",{msg:"添加成功~~"})
 	} catch (err) {
-		console.log(err);
+		console.log(err)
 		showToast({title:err});
 	} finally{
 		uni.hideLoading()
@@ -149,14 +149,14 @@ const delImg = (e) =>{
 }
 
 const init = () =>{
-	formData = ref({
+	formData.value = {
 		name:"",
 		sort:0,
 		picurl:"",
 		select:false,
 		enable:false,
 		tempurl:""
-	})
+	}
 }
 
 defineExpose({

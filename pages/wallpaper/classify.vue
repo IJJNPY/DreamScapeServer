@@ -9,14 +9,14 @@
 					<i class="el-icon-plus"></i>
 					新增分类
 				</button>
-				<button type="warn" size="mini">
+				<button type="warn" size="mini" @click="batchRemove">
 					<i class="el-icon-delete"></i>
 					批量删除
 				</button>
 			</template>
 		</custom-head-top>
 		<view class="main">
-			<uni-table border stripe emptyText="暂无更多数据">
+			<uni-table ref="tableRef" border stripe emptyText="暂无更多数据" type="selection" @selection-change="selectionChange">
 				<uni-tr>
 					<uni-th align="center">缩略图</uni-th>
 					<uni-th align="center">分类名称</uni-th>
@@ -45,7 +45,8 @@
 					<uni-td>
 						<view class="operate-btn-group">
 							<button size="mini" type="primary" plain>修改</button>
-							<button size="mini" type="warn" plain>删除</button>
+							<button size="mini" type="warn" plain 
+							@click="removeItem(item._id)">删除</button>
 						</view>
 					</uni-td>
 				</uni-tr>
@@ -55,19 +56,19 @@
 			<uni-pagination title="标题文字" show-icon="true" total="50" current="2"></uni-pagination>
 		</view>
 		
-		<classify-popup-vue ref="classPopRef" @success="getClassify()"></classify-popup-vue>
+		<classify-popup-vue ref="classPopRef" @addsuccess="getClassify()"></classify-popup-vue>
 	</view>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import classifyPopupVue from './child/classifyPopup.vue';
-import { showToast } from '../../utils/common';
-const emits = defineEmits(["success"]);
+import { showModal, showToast } from '../../utils/common';
 const classPopRef = ref(null);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify");
 const classData = ref([]);
-
+cosnt tableRef = ref(null;
+const ids = ref([]);
 //新增打开弹窗
 const handleAdd = () =>{
 	classPopRef.value.open();
@@ -77,6 +78,40 @@ const getClassify = async() =>{
 	let {errCode,errMsg,data} = await classifyCloudObj.list();
 	if(errCode!==0) return showToast({title:errMsg});
 	classData.value = data;
+}
+
+//选择器
+const selectionChange = (e) =>{
+	ids.value = e.detail.index.map(index=>classData.value[index]._id);
+	console.log(ids.value);
+}
+
+//批量删除
+const batchRemove = async() =>{
+	removeItem(ids.value);
+	
+}
+
+//删除一条记录
+const removeItem = async(id) =>{
+	let arrs = Array.isArray(id) ? [...id] : [id];
+	
+	try{
+		if(id){
+			let feedback = await showModal({content:"是否确认删除?"});
+			if(feedback!='confirm') return;
+			let {errCode,errMsg} = await classifyCloudObj.remove(arrs);
+			if(errCode!==0) showToast({title:errMsg});
+			showToast({title:"删除成功"});
+			tableRef.value.clearSelection();
+			ids.value = [];
+			getClassify();
+		}else{
+			showToast({title:"所选项ID不存在"})
+		}
+	}catch(err){
+		console.log(err);
+	}
 }
 
 getClassify();
