@@ -118,6 +118,7 @@ const uploadFile = async() =>{
 	})
 }
 
+//打开弹窗
 const open = () =>{
 	classifyPopup.value.open();
 }
@@ -125,6 +126,7 @@ const open = () =>{
 //取消新增打开弹窗
 const classifyCancel = () =>{
 	classifyPopup.value.close();
+	init();
 }
 
 const selectChange = (e) =>{
@@ -148,6 +150,7 @@ const delImg = (e) =>{
 	formData.picurl = "";
 }
 
+//初始化表单
 const init = () =>{
 	formData.value = {
 		name:"",
@@ -159,6 +162,7 @@ const init = () =>{
 	}
 }
 
+//对父级暴露接口
 defineExpose({
 	open
 })

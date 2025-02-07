@@ -28,3 +28,8 @@ export function compressImage(url, quality = 0.8) {
     img.src = url;
   });
 }
+
+export function getSmallImg(url,width=100){
+	if(url) return url+"?x-oss-process=image/resize,w_"+width;
+	else return "/static/logo.png"
+}

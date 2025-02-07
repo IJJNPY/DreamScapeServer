@@ -9,8 +9,8 @@
 					<i class="el-icon-plus"></i>
 					新增分类
 				</button>
-				<button type="warn" size="mini" @click="batchRemove">
-					<i class="el-icon-delete"></i>
+				<button type="warn" size="mini" @click="batchRemove" :disabled="!ids.length">
+					<i class="el-icon-delete" :color="ids.length?'#fff':'rgba(255,255,255,0.5)'"></i>
 					批量删除
 				</button>
 			</template>
@@ -27,7 +27,7 @@
 				</uni-tr>
 				<uni-tr v-for="item in classData" :key="item._id">
 					<uni-td>
-						<image class="thumb" :src="item.picurl || '/static/logo.png'" mode="aspectFill"></image>
+						<image class="thumb" :src="getSmallImg(item.picurl)" mode="aspectFill"></image>
 					</uni-td>
 					<uni-td>
 						{{item.name}}
@@ -64,10 +64,11 @@
 import { ref } from 'vue';
 import classifyPopupVue from './child/classifyPopup.vue';
 import { showModal, showToast } from '../../utils/common';
+import { getSmallImg } from '../../utils/tools';
 const classPopRef = ref(null);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify");
 const classData = ref([]);
-cosnt tableRef = ref(null;
+const tableRef = ref(null);
 const ids = ref([]);
 //新增打开弹窗
 const handleAdd = () =>{
