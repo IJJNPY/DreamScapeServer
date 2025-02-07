@@ -27,14 +27,14 @@
 					</view>
 				</uni-forms-item>
 				<uni-forms-item label="是否推荐" name="select">
-					<switch v-model="formData.select" style="transform: scale(0.7);transform-origin:left center;" @change="selectChange"/>
+					<switch v-model="formData.select" :checked="formData.select" style="transform: scale(0.7);transform-origin:left center;" @change="selectChange"/>
 				</uni-forms-item>
 				<uni-forms-item label="是否启用" name="enable">
-					<switch v-model="formData.enable" style="transform: scale(0.7);transform-origin:left center;" @change="enableChange"/>
+					<switch v-model="formData.enable" :checked="formData.enable" style="transform: scale(0.7);transform-origin:left center;" @change="enableChange"/>
 				</uni-forms-item>
 				<uni-forms-item>
 					<view class="group">
-						<button size="mini" type="primary" @click="submit">确认</button>
+						<button size="mini" type="primary" @click="submit">{{typename}}</button>
 						<button size="mini" type="default" @click="classifyCancel">取消</button>
 					</view>
 				</uni-forms-item>
@@ -44,15 +44,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import dayjs from "dayjs";
 import { cloudToHttps, compressImage } from "@/utils/tools.js"
 import { showToast } from '../../../utils/common';
 
 const emits = defineEmits(["addsuccess"]);
+const props = defineProps(["item","type"]);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify",{customUI:true});
 const fromRef = ref(null);
 const classifyPopup = ref(null);
+const typename = computed(()=>props.type=='add'?'新增':'修改');
 const formData = ref({
 	name:"",
 	sort:0,
@@ -61,6 +63,14 @@ const formData = ref({
 	enable:false,
 	tempurl:""
 })
+
+watch(()=>props.item,(nv)=>{
+	formData.value = {
+		...nv,
+		tempurl:nv.picurl
+	}
+})
+
 const rules = ref({
 	name:{
 		rules:[
@@ -82,7 +92,7 @@ const submit = async() =>{
 	try {
 		uni.showLoading({mask:true})
 		await fromRef.value.validate()
-		if(formData.value.tempurl){
+		if(formData.value.tempurl && formData.value.tempurl != formData.value.picurl){
 			let file = await uploadFile();
 			//formData.value.picurl = cloudToHttps(file.fileID) 支付宝云和腾讯云需要进行cloud地址与http地址的转换，阿里云不需要
 			formData.value.picurl = file.fileID;
@@ -90,14 +100,17 @@ const submit = async() =>{
 		let params = {...formData.value};
 		delete params.tempurl;
 		
-		let {errCode,errMsg} = await classifyCloudObj.add(params);
+		let {errCode,errMsg} = props.type == 'add' ?
+		await classifyCloudObj.add(params) :
+		await classifyCloudObj.update(params);
+		
 		if(errCode!=0){
 			return showToast({title:errMsg});
 		}
-		showToast({title:"添加成功"});
+		showToast({title:typename.value+"成功"});
 		classifyCancel();
 		init();
-		emits("addsuccess",{msg:"添加成功~~"})
+		emits("addsuccess",{msg:typename.value+"成功~~"})
 	} catch (err) {
 		console.log(err)
 		showToast({title:err});
@@ -147,7 +160,8 @@ const selectPicurl = (e) =>{
 }
 
 const delImg = (e) =>{
-	formData.picurl = "";
+	formData.value.picurl = "";
+	formData.value.tempurl = "";
 }
 
 //初始化表单

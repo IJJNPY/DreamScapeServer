@@ -44,7 +44,7 @@
 					</uni-td>
 					<uni-td>
 						<view class="operate-btn-group">
-							<button size="mini" type="primary" plain>修改</button>
+							<button size="mini" type="primary" plain @click="update(item._id)">修改</button>
 							<button size="mini" type="warn" plain 
 							@click="removeItem(item._id)">删除</button>
 						</view>
@@ -56,7 +56,7 @@
 			<uni-pagination title="标题文字" show-icon="true" total="50" current="2"></uni-pagination>
 		</view>
 		
-		<classify-popup-vue ref="classPopRef" @addsuccess="getClassify()"></classify-popup-vue>
+		<classify-popup-vue ref="classPopRef" :item="item" :type="type" @addsuccess="getClassify()"></classify-popup-vue>
 	</view>
 </template>
 
@@ -66,12 +66,15 @@ import classifyPopupVue from './child/classifyPopup.vue';
 import { showModal, showToast } from '../../utils/common';
 import { getSmallImg } from '../../utils/tools';
 const classPopRef = ref(null);
-const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify");
+const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify",{customUI:true});
 const classData = ref([]);
 const tableRef = ref(null);
 const ids = ref([]);
+const item = ref(null);
+const type = ref("add")
 //新增打开弹窗
 const handleAdd = () =>{
+	type.value = 'add';
 	classPopRef.value.open();
 }
 
@@ -113,6 +116,22 @@ const removeItem = async(id) =>{
 	}catch(err){
 		console.log(err);
 	}
+}
+
+//修改一条记录
+const update = async(id) =>{
+	
+	try{
+		let {data,errCode,errMsg} = await classifyCloudObj.item(id);
+		if(errCode!==0) return showModal({content:errMsg,showCancel:false});
+		item.value = data;
+		type.value = 'update'
+		classPopRef.value.open();
+	}catch(err){
+		console.log(err);
+	}
+	
+	
 }
 
 getClassify();
