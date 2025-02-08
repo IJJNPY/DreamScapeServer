@@ -24,3 +24,22 @@ export function showModal({content="",showCancel=true}={}){
 		})
 	})
 }
+
+//封装跳转方法
+export const routerTo = (url,type='navigate')=>{
+	if(type === 'navigate'){
+		uni.navigateTo({
+			url
+		})
+	}else if(type === 'redirect'){
+		uni.redirectTo({
+			url
+		})
+	}else if(type === 'reLaunch'){
+		uni.reLaunch({
+			url
+		})
+	}else{
+		return "错误信息"
+	}
+}

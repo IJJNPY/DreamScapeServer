@@ -44,13 +44,13 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import dayjs from "dayjs";
 import { cloudToHttps, compressImage } from "@/utils/tools.js"
 import { showToast } from '../../../utils/common';
 
 const emits = defineEmits(["addsuccess"]);
-const props = defineProps(["item","type"]);
+const props = defineProps(["item","type","maxsort"]);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify",{customUI:true});
 const fromRef = ref(null);
 const classifyPopup = ref(null);
@@ -69,6 +69,7 @@ watch(()=>props.item,(nv)=>{
 		...nv,
 		tempurl:nv.picurl
 	}
+	console.log(formData.value);
 })
 
 const rules = ref({
@@ -133,6 +134,13 @@ const uploadFile = async() =>{
 
 //打开弹窗
 const open = () =>{
+	//等待DOM层全部完成操作后再赋值，父组件向子组件传递值时由于DOM加载顺序的原因可能会导致props值更新不及时
+	nextTick(()=>{
+		if(props.type == 'add'){
+			formData.value.sort = props.maxsort+1;
+			console.log(formData.value);
+		}
+	})
 	classifyPopup.value.open();
 }
 

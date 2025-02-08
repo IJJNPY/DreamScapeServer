@@ -40,7 +40,7 @@
 						<uni-tag v-else text="普通" inverted />
 					</uni-td>
 					<uni-td>
-						<switch :checked="item.enable" style="transform: scale(0.7);transform-origin:left center;"/>
+						<switch :checked="item.enable" style="transform: scale(0.7);transform-origin:left center;" @change="enableChange($event,item._id)"/>
 					</uni-td>
 					<uni-td>
 						<view class="operate-btn-group">
@@ -56,7 +56,7 @@
 			<uni-pagination title="标题文字" show-icon="true" total="50" current="2"></uni-pagination>
 		</view>
 		
-		<classify-popup-vue ref="classPopRef" :item="item" :type="type" @addsuccess="getClassify()"></classify-popup-vue>
+		<classify-popup-vue ref="classPopRef" :item="item" :type="type" @addsuccess="getClassify()" :maxsort="classData[classData.length-1]?.sort"></classify-popup-vue>
 	</view>
 </template>
 
@@ -71,7 +71,7 @@ const classData = ref([]);
 const tableRef = ref(null);
 const ids = ref([]);
 const item = ref(null);
-const type = ref("add")
+const type = ref("add");
 //新增打开弹窗
 const handleAdd = () =>{
 	type.value = 'add';
@@ -120,15 +120,30 @@ const removeItem = async(id) =>{
 
 //修改一条记录
 const update = async(id) =>{
-	
+	type.value = 'update'
 	try{
 		let {data,errCode,errMsg} = await classifyCloudObj.item(id);
 		if(errCode!==0) return showModal({content:errMsg,showCancel:false});
 		item.value = data;
-		type.value = 'update'
 		classPopRef.value.open();
 	}catch(err){
 		console.log(err);
+	}
+	
+	
+}
+
+const enableChange = async(e,id) => {
+	try{
+		uni.showLoading({
+			mask:true
+		})
+		let {errCode,errMsg} = await classifyCloudObj.update({_id:id,enable:e.detail.value});
+		if(errCode!=0) return showToast({title:errMsg});
+	}catch(err){
+		console.log(err);
+	}finally{
+		uni.hideLoading();
 	}
 	
 	
