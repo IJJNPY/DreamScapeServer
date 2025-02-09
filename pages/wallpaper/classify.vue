@@ -122,7 +122,7 @@ const removeItem = async(id) =>{
 const update = async(id) =>{
 	type.value = 'update'
 	try{
-		let {data,errCode,errMsg} = await classifyCloudObj.item(id);
+		let {data,errCode,errMsg} = await classifyCloudObj.getitem(id);
 		if(errCode!==0) return showModal({content:errMsg,showCancel:false});
 		item.value = data;
 		classPopRef.value.open();

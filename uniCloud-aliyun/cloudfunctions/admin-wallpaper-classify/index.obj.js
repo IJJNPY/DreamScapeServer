@@ -22,7 +22,7 @@ module.exports = {
 		})
 		return await dbJQL.collection("wallpaper-classify").where(`_id in ${JSON.stringify(ids)}`).remove()
 	},
-	async item(id){
+	async getitem(id){
 		const dbJQL = uniCloud.databaseForJQL({
 			clientInfo:this.getClientInfo()
 		})

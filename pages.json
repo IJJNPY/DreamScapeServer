@@ -161,6 +161,20 @@
 	{
 		"navigationBarTitleText" : "分类"
 	}
+},
+{
+	"path" : "pages/wallpaper/picadd",
+	"style" : 
+	{
+		"navigationBarTitleText" : "壁纸新增"
+	}
+},
+{
+	"path" : "pages/wallpaper/piclist",
+	"style" : 
+	{
+		"navigationBarTitleText" : "壁纸列表"
+	}
 }
 ],
 	"subPackages": [{
