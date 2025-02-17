@@ -66,6 +66,8 @@
 		<view class="paging">
 			<uni-pagination :current="params.current" :total="params.total" :page-size="params.size" :show-icon="true" @change="pageChange"></uni-pagination>
 		</view>
+		
+		<piclistPopup ref="picPopRef" v-model:item="picItem" @success="getData()"></piclistPopup>
 	</view>
 </template>
 
@@ -74,10 +76,13 @@ import { onMounted, ref } from 'vue';
 import { routerTo, showModal, showToast, previewImg } from '../../utils/common';
 import dayjs from 'dayjs';
 import { getSmallImg } from '../../utils/tools';
+import piclistPopup from './child/piclistPopup.vue';
+const picPopRef = ref(null);
 const picCloudObj = uniCloud.importObject("admin-wallpaper-piclist");
 const selectValue = ref("");
 const selectRef = ref(null);
 const picList = ref([]);
+const picItem = ref();
 const params = ref({
 	current:1,
 	total:0,
@@ -109,7 +114,21 @@ const getData = async() =>{
 
 }
 
-const update = (id) =>{
+//修改图片
+const update = async(id) =>{
+	try {
+		let {errCode,errMsg,data} = await picCloudObj.getitem(id);
+		if(errCode!==0) return showToast({title:errMsg});
+		picItem.value = {...data,tempurl:data.picurl};
+		picPopRef.value.open();
+	} catch (err) {
+		console.log(err);
+	}
+	
+}
+
+//提交图片
+const submit = async(id) =>{
 	
 }
 

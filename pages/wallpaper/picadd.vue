@@ -10,13 +10,13 @@
 			<view class="grid">
 				<view class="itemBox pic" v-for="(item,index) in piclist" :key="index">
 					<view class="close" @click="handleClose(index)">x</view>
-					<picEditItem :item="item"></picEditItem>
+					<picEditItem v-model:item="piclist[index]"></picEditItem>
 				</view>
 				<view class="itemBox add" @click="handleSelect" v-if="piclist.length<9">
 					<view class="icon">+</view>
 					<view class="text">点击选择图片</view>
 				</view>
-				
+				<view>{{piclist}}</view>
 				<view class="setClassify" v-if="piclist.length">
 					<uni-data-select ref="selectRef" @change="classifyChange" collection="wallpaper-classify" 
 					field = "_id as value, name as text, sort"
@@ -69,10 +69,6 @@ const handleSelect = async() =>{
 	console.log(piclist.value)
 }
 
-const checkedChange = (e,index) =>{
-	piclist.value[index].checked = e.detail.value;
-}
-
 //移除选择
 const handleClose = async(index) => {
 	let feedback = await showModal({
@@ -92,17 +88,6 @@ const handleReset = async() =>{
 	if(feedback == "confirm"){
 		piclist.value = [];
 	}
-}
- 
-//确认标签
-const tabConfirm = (index) =>{
-	piclist.value[index].tabs = [...piclist.value[index].tabs, piclist.value[index].iptValue];
-	delete piclist.value[index].iptValue;
-}
-
-//删除标签
-const delTab = (index, tabidx) => {
-	piclist.value[index].tabs.splice(tabidx,1);
 }
 
 //选择分类
@@ -129,7 +114,7 @@ const submit = async() =>{
 			let {tempurl, ...rest} = item;
 			return {
 				...rest,
-				score:rest.score.toString(),
+				classid:selectValue.value,
 				picurl:cloudFiles[index].fileID
 			}
 		})
@@ -210,75 +195,7 @@ const checkDescription = () =>{
 				align-items: center;
 				justify-content: center;
 				cursor: pointer;
-			}
-			.left{
-				width: 120px;
-				aspect-ratio: 9/20;
-				position: relative;
-				background: conic-gradient(#ccc 0 25%, #fff 25% 50%, #ccc 50% 75%, #fff 75% 100%);
-				background-size: 10px 10px;
-				image{
-					width: 100%;
-					height: 100%;
-				}
-				.mask{
-					position: absolute;
-					bottom: 0;
-					left: 0;
-					width: 100%;
-					height: 30px;
-					background: rgba(0, 0, 0, 0.4);
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					.icon{
-						flex: 1;
-						height: 100%;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						cursor: pointer;
-					}
-				}
-			}
-			.right{
-				flex: 1;
-				margin-left: 20px;
-				color: #666;
-				.row{
-					margin-bottom: 20px;
-					.label{
-						font-size: 14px;
-						margin-bottom: 6px;
-					}
-					.tabGroup{
-						display: flex;
-						padding: 6px;
-						flex-wrap: wrap;
-						gap: 6px;
-						.tab{
-							border: 1px solid #1A73E8;
-							border-radius: 100px;
-							color: #1A73E8;
-							font-size: 12px;
-							padding: 2px 6px;
-							cursor: pointer;
-							margin-right: 6px;
-						}
-						.tab:hover{
-							text-decoration: line-through;
-						}
-					}
-					&.inline{
-						display: flex;
-						align-items: center;
-						gap: 10px;
-						.label{
-							margin-bottom: 0;
-						}
-					}
-				}
-				
+				z-index: 2;
 			}
 		}
 		

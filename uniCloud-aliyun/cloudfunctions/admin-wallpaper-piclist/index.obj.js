@@ -60,5 +60,24 @@ module.exports = {
 		
 		let [,result] = await Promise.all([deleteFilePromise,removeDataPromise]);
 		return result; 
+	},
+	async getitem(id){
+		const dbJQL = uniCloud.databaseForJQL({
+			clientInfo:this.getClientInfo()
+		})
+		return await dbJQL.collection("wallpaper-piclist").doc(id).field(`
+		picurl,
+		description,
+		score,
+		tabs,
+		checked
+		`).get({getOne:true});
+	},
+	async update(params={}){
+		let {_id,...data} = params;
+		const dbJQL = uniCloud.databaseForJQL({
+			clientInfo:this.getClientInfo()
+		})
+		return await dbJQL.collection("wallpaper-piclist").doc(_id).update(data);
 	}
 }
