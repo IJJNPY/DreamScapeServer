@@ -1,7 +1,6 @@
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __commonJS = (cb, mod) => function __require() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-};
+import {
+  __commonJS
+} from "./chunk-Y2F7D3TJ.js";
 
 // E:/UniappCode/DreamScapeServer/node_modules/dayjs/dayjs.min.js
 var require_dayjs_min = __commonJS({

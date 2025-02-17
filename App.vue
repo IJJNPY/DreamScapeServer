@@ -92,4 +92,5 @@
 	@import '@/common/custom.scss';
 	@import 'https://unpkg.com/element-ui/lib/theme-chalk/index.css';
 	@import 'https://unpkg.com/@element-plus/icons-vue';
+	@import 'https://at.alicdn.com/t/c/font_4830309_cxdjh3o4sc4.css'
 </style>

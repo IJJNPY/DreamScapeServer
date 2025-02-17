@@ -1,3 +1,6 @@
+import dayjs from "dayjs"
+import { compressImage } from "./tools"
+
 export function showToast({title="", duration=1500, icon="none", mask=false}={}){
 	uni.showToast({
 		title:String(title),
@@ -49,4 +52,18 @@ export function previewImg(url){
 	uni.previewImage({
 		urls:[url]
 	})
+}
+
+export const uploadFileItem = async(url) =>{
+	let tempurl = await compressImage(url)
+	return uniCloud.uploadFile({
+		filePath: tempurl,
+		cloudPath: "wallpaper/"+dayjs().format("YYYYMMDD")+"/"+Date.now()+".webp",
+		//阿里云必须要设置，腾讯云和支付宝云不需要
+		cloudPathAsRealPath: true
+	})
+}
+
+export const uploadFileGroup = async(url) =>{
+
 }

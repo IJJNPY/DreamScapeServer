@@ -16,7 +16,7 @@
 						<view class="box pic" v-else>
 							<image :src="formData.tempurl" mode="aspectFit"></image>
 							<view class="mask">
-								<view class="icon">
+								<view class="icon" @click="editImg">
 									<uni-icons type="compose" size="20" color="#fff"></uni-icons>
 								</view>
 								<view class="icon" @click="delImg">
@@ -41,6 +41,7 @@
 			</uni-forms>
 		</view>
 	</uni-popup>
+	<cropper-image ref="cropperRef" :tempurl="formData.tempurl" @confirm="formData.tempurl = $event"></cropper-image>
 </template>
 
 <script setup>
@@ -53,6 +54,7 @@ const emits = defineEmits(["addsuccess"]);
 const props = defineProps(["item","type","maxsort"]);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify",{customUI:true});
 const fromRef = ref(null);
+const cropperRef = ref(null);
 const classifyPopup = ref(null);
 const typename = computed(()=>props.type=='add'?'新增':'修改');
 const formData = ref({
@@ -172,6 +174,10 @@ const delImg = (e) =>{
 	formData.value.tempurl = "";
 }
 
+const editImg = () =>{
+	cropperRef.value.open();
+}
+
 //初始化表单
 const init = () =>{
 	formData.value = {
@@ -220,6 +226,8 @@ defineExpose({
 		}
 		.pic{
 			position: relative;
+			background: conic-gradient(#ccc 0 25%, #fff 25% 50%, #ccc 50% 75%, #fff 75% 100%);
+			background-size: 10px 10px;
 			image{
 				width: 100%;
 				height: 100%;

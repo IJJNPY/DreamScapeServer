@@ -94,6 +94,7 @@
 		}
 	},
 	"dependencies": {
-		"dayjs": "^1.11.13"
+		"dayjs": "^1.11.13",
+		"vue-cropper": "^1.1.4"
 	}
 }

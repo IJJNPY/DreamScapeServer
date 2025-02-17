@@ -3,7 +3,7 @@
 		<view class="left">
 			<image :src="item.tempurl" mode="aspectFit"></image>
 			<view class="mask">
-				<view class="icon">
+				<view class="icon" @click="editImg">
 					<uni-icons type="compose" size="20" color="#fff"></uni-icons>
 				</view>
 			</view>
@@ -30,6 +30,7 @@
 			</view>
 		</view>
 	</view>
+	<cropper-image ref="cropperRef" :tempurl="item.tempurl" @confirm="tempChange"></cropper-image>
 </template>
 
 <script setup>
@@ -37,6 +38,7 @@ import { ref } from 'vue';
 const props = defineProps(["item"]);
 const emits = defineEmits(['update:item'])
 const iptValue = ref("")
+const cropperRef = ref(null)
 
 //是否展现切换开关
 const checkedChange = (e) =>{
@@ -65,6 +67,15 @@ const delTab = (tabidx) => {
 	let tab = [...props.item.tabs];
 	tab.splice(tabidx,1);
 	emits("update:item",{...props.item,tabs:tab});
+}
+
+const editImg = () =>{
+	cropperRef.value.open();
+}
+
+//裁剪完毕图片
+const tempChange = (e) =>{
+	emits("update:item",{...props.item,tempurl:e})
 }
 </script>
 
