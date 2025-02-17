@@ -27,7 +27,7 @@
 				</uni-tr>
 				<uni-tr v-for="item in classData" :key="item._id">
 					<uni-td>
-						<image class="thumb" :src="getSmallImg(item.picurl)" mode="aspectFill"></image>
+						<image class="thumb" @click="previewImg(item.picurl)" :src="getSmallImg(item.picurl)" mode="aspectFill"></image>
 					</uni-td>
 					<uni-td>
 						{{item.name}}
@@ -63,7 +63,7 @@
 <script setup>
 import { ref } from 'vue';
 import classifyPopupVue from './child/classifyPopup.vue';
-import { showModal, showToast } from '../../utils/common';
+import { showModal, showToast, previewImg } from '../../utils/common';
 import { getSmallImg } from '../../utils/tools';
 const classPopRef = ref(null);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify",{customUI:true});

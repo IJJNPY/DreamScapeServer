@@ -5,7 +5,14 @@
 				壁纸列表
 			</template>
 			<template #right>
-				<uni-data-select style="width: 200px;" placeholder="选择分类"></uni-data-select>
+				<uni-data-select style="width: 200px;" ref="selectRef" @change="classifyChange" collection="wallpaper-classify" 
+				field = "_id as value, name as text, sort"
+				:where="`enable == true`"
+				orderby="sort asc"
+				clear
+				placement="bottom"
+				v-model="selectValue"
+				></uni-data-select>
 				<button type="primary" size="mini" @click="handleAdd">
 					<i class="el-icon-plus"></i>
 					新增壁纸
@@ -18,10 +25,10 @@
 				<uni-tr>
 					<uni-th align="center">缩略图</uni-th>
 					<uni-th align="center">分类</uni-th>
-					<uni-th align="center">评分</uni-th>
+					<uni-th align="center" sortable @sort-change="starSortChange">评分</uni-th>
 					<uni-th align="center">评分数</uni-th>
-					<uni-th align="center">下载数</uni-th>
-					<uni-th align="center">阅读数</uni-th>
+					<uni-th align="center" sortable @sort-change="downloadSortChange">下载数</uni-th>
+					<uni-th align="center" sortable @sort-change="viewSortChange">阅读数</uni-th>
 					<uni-th align="center">是否可见</uni-th>
 					<uni-th align="center">发布人</uni-th>
 					<uni-th align="center">发布时间</uni-th>
@@ -29,7 +36,7 @@
 				</uni-tr>
 				<uni-tr v-for="item in picList" :key="item._id">
 					<uni-td class="thumb">
-						<image :src="getSmallImg(item.picurl)" mode="aspectFill"></image>
+						<image @click="previewImg(item.picurl)" :src="getSmallImg(item.picurl)" mode="aspectFill"></image>
 					</uni-td>
 					<uni-td>{{item.classid[0].name}}</uni-td>
 					<uni-td class="score">
@@ -63,16 +70,25 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { routerTo } from '../../utils/common';
+import { onMounted, ref } from 'vue';
+import { routerTo, showModal, showToast, previewImg } from '../../utils/common';
 import dayjs from 'dayjs';
 import { getSmallImg } from '../../utils/tools';
 const picCloudObj = uniCloud.importObject("admin-wallpaper-piclist");
+const selectValue = ref("");
+const selectRef = ref(null);
 const picList = ref([]);
 const params = ref({
 	current:1,
 	total:0,
-	size:5
+	size:5,
+	viewSort:"",
+	downloadSort:"",
+	starSort:""
+})
+
+onMounted(()=>{
+	selectRef.value.clearVal();
 })
 
 
@@ -97,8 +113,49 @@ const update = (id) =>{
 	
 }
 
-const removeItem = (id) =>{
+const removeItem = async(id) =>{
+	try{
+		let feedback = await showModal({content:"是否确认删除?"});
+		if(feedback!=='confirm') return;
+		uni.showLoading({
+			mask:true
+		});
+		let res = await picCloudObj.remove([id]);
+		let {errCode,errMsg} = await picCloudObj.remove([id]);
+		if(errCode!==0) return showToast({"title":errMsg});
+		showToast({"title":"删除成功"});
+		getData();
+	}catch(err){
+		showToast({"title":err});
+	}finally{
+		uni.hideLoading();
+	}
 	
+}
+
+const viewSortChange = (e) =>{
+	let {order} = e;
+	params.value.viewSort = order == 'ascending' ? 'asc' : order == 'descending' ? 'desc' : '';
+	getData();
+}
+
+const downloadSortChange = (e) =>{
+	let {order} = e;
+	params.value.downloadSort = order == 'ascending' ? 'asc' : order == 'descending' ? 'desc' : '';
+	getData();
+}
+
+const starSortChange = (e) =>{
+	let {order} = e;
+	params.value.starSort = order == 'ascending' ? 'asc' : order == 'descending' ? 'desc' : '';
+	getData();
+}
+
+//分类选择
+const classifyChange = (e) =>{
+	console.log(e);
+	params.value.classid = e;
+	getData();
 }
 
 getData();

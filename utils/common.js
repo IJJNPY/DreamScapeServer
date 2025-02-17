@@ -43,3 +43,10 @@ export const routerTo = (url,type='navigate')=>{
 		return "错误信息"
 	}
 }
+
+export function previewImg(url){
+	if(!url) return;
+	uni.previewImage({
+		urls:[url]
+	})
+}
