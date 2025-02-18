@@ -20,6 +20,7 @@ const emits = defineEmits(["update:item","success"]);
 const props = defineProps(["item"]);
 const popup = ref(null);
 const picCloudObj = uniCloud.importObject('admin-wallpaper-piclist');
+const imageCloudObj = uniCloud.importObject('handle-image');
 
 const open = () =>{
 	popup.value.open();
@@ -35,14 +36,17 @@ const itemChange = (e) =>{
 
 const submit = async() =>{
 	let picurl = props.item.picurl
+	let file
 	if(props.item.tempurl && props.item.tempurl != props.item.picurl){
-		let file = await uploadFileItem(props.item.tempurl);
+		file = await uploadFileItem(props.item.tempurl);
 		//formData.value.picurl = cloudToHttps(file.fileID) 支付宝云和腾讯云需要进行cloud地址与http地址的转换，阿里云不需要
 		picurl = file.fileID;
 	}
 	let {tempurl,...params} = props.item;
 	let {errCode,errMsg} = await picCloudObj.update({...params,picurl});
 	if(errCode!==0) return showToast({title:errMsg});
+	
+	if(file) imageCloudObj.remove(props.item.picurl);
 	close();
 	emits("success");
 }

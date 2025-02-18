@@ -1,0 +1,7 @@
+{
+  "name": "client-wallpaper-classify",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}
