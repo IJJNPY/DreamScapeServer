@@ -1,0 +1,7 @@
+{
+  "name": "client-wallpaper-piclist",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}
