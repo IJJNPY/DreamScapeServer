@@ -1,0 +1,60 @@
+{
+	"bsonType": "object",
+	"required": [
+		"name"
+	],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "存储ID，系统自动生成"
+		},
+		"picurl": {
+			"bsonType": "string",
+			"description": "图片地址"
+		},
+		"url": {
+			"bsonType": "string",
+			"description": "跳转地址"
+		},
+		"sort": {
+			"bsonType": "int",
+			"description": "显示顺序",
+			"defaultValue": "0"
+		},
+		"checked": {
+			"bsonType": "bool",
+			"description": "是否可见",
+			"defaultValue": true	//true显示 false隐藏
+		},
+		"target": {
+			"bsonType": "string",
+			"description": "跳转类型",
+			"defaultValue": "self"	//默认self站内，minProgram站外
+		},
+		"appid": {
+			"bsonType": "string",
+			"description": "外站appid"
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "作者ID",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	},
+	"version": "0.0.1"
+}

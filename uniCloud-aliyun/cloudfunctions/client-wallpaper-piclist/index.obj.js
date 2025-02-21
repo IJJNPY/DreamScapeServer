@@ -1,4 +1,7 @@
 // 云对象教程: https://uniapp.dcloud.net.cn/uniCloud/cloud-obj
+
+const { getData } = require("./hooks.js");
+
 // jsdoc语法提示教程：https://ask.dcloud.net.cn/docs/#//ask.dcloud.net.cn/article/129
 const db = uniCloud.database();
 const dbCmd = db.command;
@@ -10,41 +13,22 @@ module.exports = {
 		if(!classid) return {errCode:400,errMsg:"classid必须填写"};
 		pageSize = Math.min(pageSize,20);
 		let skip =(pageNum-1)*pageSize;
+		let condition = {
+			checked: true,
+			classid
+		}
 		
-		const dbJQL = uniCloud.databaseForJQL({
-			clientInfo:this.getClientInfo()
-		})
-		
-		let picTemp = dbJQL.collection("wallpaper-piclist")
-		.where(`classid == "${classid}" && checked == true`)
-		.orderBy("createTime","desc").skip(skip).limit(pageSize).getTemp();
-		
-		let userTemp = dbJQL.collection("uni-id-users").field("_id,nickname").getTemp();
-		
-		let classTemp = dbJQL.collection("wallpaper-classify").field("_id,name").getTemp();
-		
-		let res = await dbJQL.collection(picTemp,userTemp,classTemp)
-		.field(`
-		_id,
-		checked,
-		classid.name as classname,
-		description,
-		picurl,
-		score,
-		tabs,
-		user_id.nickname as nickname,
-		view_count
-		`)
-		.get();
-		
-		let data = res.data.map(item=>({...item,classname:item.classname[0],nickname:item.nickname[0]}));
-		
-		return {...res,data};
+		return await getData(this,condition,skip,pageSize);
 
 	},
 	
 	async item(id=null){
 		if(!id) return {errCode:400,errMsg:"id必须填写"};
+		
+		let condition = {
+			checked: true,
+			classid
+		}
 		
 		const dbJQL = uniCloud.databaseForJQL({
 			clientInfo:this.getClientInfo()
@@ -96,5 +80,23 @@ module.exports = {
 		db.collection("wallpaper-piclist").doc(id).update({
 			view_count:dbCmd.inc(1)
 		})
-	}
+	},
+	
+	//搜索
+	async search({pageSize=9,pageNum=1,keyword=""}={}){
+		if(!keyword) return {errCode:400,errMsg:"classid必须填写"};
+		pageSize = Math.min(pageSize,20);
+		let skip =(pageNum-1)*pageSize;
+		
+		let condition = {
+			checked:true,
+			$or:[
+				{description:{$regex:keyword,$options:'i'}},
+				{tabs:{$regex:keyword,$options:'i'}}
+			]
+		}
+		
+		return await getData(this,condition,skip,pageSize);
+	
+	},
 }

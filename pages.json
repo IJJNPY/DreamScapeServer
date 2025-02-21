@@ -175,6 +175,13 @@
 	{
 		"navigationBarTitleText" : "壁纸列表"
 	}
+},
+{
+	"path" : "pages/activity/banner",
+	"style" : 
+	{
+		"navigationBarTitleText" : "海报"
+	}
 }
 ],
 	"subPackages": [{
