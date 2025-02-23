@@ -46,6 +46,8 @@
 				</uni-tr>
 			</uni-table>
 		</view>
+		
+		<bannerPopupVue ref="popupRef" @success=""></bannerPopupVue>
 	</view>
 </template>
 
@@ -53,7 +55,21 @@
 import { ref } from 'vue';
 import { previewImg } from '../../utils/common';
 import { getSmallImg } from '../../utils/tools';
+import bannerPopupVue from './child/bannerPopup.vue';
+
 const bannerData = ref([]);
+const popupRef = ref(null);
+const activityCloudObj = uniCloud.importObject("admin-activity-common");
+
+const getData = async() =>{
+	let {errCode,data} = await activityCloudObj.bannerList();
+	bannerData.value = data;
+	console.log(data)
+}
+
+const handleAdd = () =>{
+	popupRef.value.open();
+}
 
 const update = (id) =>{
 	

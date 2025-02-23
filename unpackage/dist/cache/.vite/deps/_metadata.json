@@ -1,19 +1,19 @@
 {
-  "hash": "f1465132",
-  "configHash": "b51ae6e8",
+  "hash": "39ecec5b",
+  "configHash": "18473463",
   "lockfileHash": "3a6ccbe1",
-  "browserHash": "c43e1377",
+  "browserHash": "6fcd375c",
   "optimized": {
     "dayjs": {
       "src": "../../../../../node_modules/dayjs/dayjs.min.js",
       "file": "dayjs.js",
-      "fileHash": "09646ab7",
+      "fileHash": "f8203798",
       "needsInterop": true
     },
     "vue-cropper": {
       "src": "../../../../../node_modules/vue-cropper/dist/vue-cropper.es.js",
       "file": "vue-cropper.js",
-      "fileHash": "8b187911",
+      "fileHash": "66cd747c",
       "needsInterop": false
     }
   },

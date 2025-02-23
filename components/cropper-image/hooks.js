@@ -17,6 +17,7 @@ export function useCropper(cropperRef){
 		{type:"1/1",text:"1 / 1",icon:""},
 		{type:"9/16",text:"9 / 16",icon:""},
 		{type:"9/20",text:"9 / 20",icon:""},
+		{type:"16/9",text:"16 / 9",icon:""},
 		{type:"rotate",text:"向右旋转",icon:"icon-rotate-right"},
 		{type:"zoomin",text:"放大",icon:"icon-zoomin"},
 		{type:"zoomout",text:"缩小",icon:"icon-zoomout"}
@@ -41,6 +42,10 @@ export function useCropper(cropperRef){
 		if(type=='9/20'){
 			options.value.fixed = true;
 			options.value.fixedNumber = [9,20];
+		}
+		if(type=='16/9'){
+			options.value.fixed = true;
+			options.value.fixedNumber = [16,9];
 		}
 		nextTick(()=>{
 			cropperRef.value.goAutoCrop();

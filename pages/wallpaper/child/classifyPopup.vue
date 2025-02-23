@@ -1,7 +1,7 @@
 <template>
 	<uni-popup ref="classifyPopup" type="center" :is-mask-click="true">
 		<view class="classifyPopup">
-			<uni-forms ref="fromRef" :modelValue="formData" :rules="rules" label-align="right" :label-width="100">
+			<uni-forms ref="formRef" :modelValue="formData" :rules="rules" label-align="right" :label-width="100">
 				<uni-forms-item label="名称" name="name" required>
 					<uni-easyinput type="text" v-model="formData.name" placeholder="请输入分类名称" />
 				</uni-forms-item>
@@ -9,22 +9,8 @@
 					<uni-easyinput type="number" v-model.number="formData.sort" placeholder="请输入排序" />
 				</uni-forms-item>
 				<uni-forms-item label="缩略图">
-					<view class="picGroup">
-						<view class="box add" v-if="!formData.tempurl" @click="selectPicurl">
-							<uni-icons type="plusempty" size="30" color="#999"></uni-icons>
-						</view>
-						<view class="box pic" v-else>
-							<image :src="formData.tempurl" mode="aspectFit"></image>
-							<view class="mask">
-								<view class="icon" @click="editImg">
-									<uni-icons type="compose" size="20" color="#fff"></uni-icons>
-								</view>
-								<view class="icon" @click="delImg">
-									<uni-icons type="trash" size="20" color="#fff"></uni-icons>
-								</view>
-							</view>
-						</view>
-					</view>
+					<select-one-img :width="100" ratio="9/16" v-model:formData="formData"
+					></select-one-img>
 				</uni-forms-item>
 				<uni-forms-item label="是否推荐" name="select">
 					<switch v-model="formData.select" :checked="formData.select" style="transform: scale(0.7);transform-origin:left center;" @change="selectChange"/>
@@ -41,20 +27,18 @@
 			</uni-forms>
 		</view>
 	</uni-popup>
-	<cropper-image ref="cropperRef" :tempurl="formData.tempurl" @confirm="formData.tempurl = $event"></cropper-image>
 </template>
 
 <script setup>
 import { computed, nextTick, ref, watch } from 'vue';
 import dayjs from "dayjs";
 import { cloudToHttps, compressImage } from "@/utils/tools.js"
-import { showToast } from '../../../utils/common';
+import { showToast, uploadFileItem } from '../../../utils/common';
 
 const emits = defineEmits(["addsuccess"]);
 const props = defineProps(["item","type","maxsort"]);
 const classifyCloudObj = uniCloud.importObject("admin-wallpaper-classify",{customUI:true});
-const fromRef = ref(null);
-const cropperRef = ref(null);
+const formRef = ref(null);
 const classifyPopup = ref(null);
 const typename = computed(()=>props.type=='add'?'新增':'修改');
 const formData = ref({
@@ -94,7 +78,7 @@ const rules = ref({
 const submit = async() =>{
 	try {
 		uni.showLoading({mask:true})
-		await fromRef.value.validate()
+		await formRef.value.validate()
 		if(formData.value.tempurl && formData.value.tempurl != formData.value.picurl){
 			let file = await uploadFile();
 			//formData.value.picurl = cloudToHttps(file.fileID) 支付宝云和腾讯云需要进行cloud地址与http地址的转换，阿里云不需要
@@ -169,15 +153,6 @@ const selectPicurl = (e) =>{
 	})
 }
 
-const delImg = (e) =>{
-	formData.value.picurl = "";
-	formData.value.tempurl = "";
-}
-
-const editImg = () =>{
-	cropperRef.value.open();
-}
-
 //初始化表单
 const init = () =>{
 	formData.value = {
@@ -208,49 +183,6 @@ defineExpose({
 		button{
 			margin: 0 20px 0 0;
 			width: 130px;
-		}
-	}
-	
-	.picGroup{
-		.box{
-			width: 100px;
-			aspect-ratio: 9/16;
-			border: 1px solid #e4e4e4;
-			overflow: hidden;
-		}
-		.add{
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			cursor: pointer;
-		}
-		.pic{
-			position: relative;
-			background: conic-gradient(#ccc 0 25%, #fff 25% 50%, #ccc 50% 75%, #fff 75% 100%);
-			background-size: 10px 10px;
-			image{
-				width: 100%;
-				height: 100%;
-			}
-			.mask{
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				width: 100%;
-				height: 30px;
-				background: rgba(0, 0, 0, 4);
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				.icon{
-					flex: 1;
-					height: 100%;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					cursor: pointer;
-				}
-			}
 		}
 	}
 }
