@@ -1,0 +1,56 @@
+{
+	"bsonType": "object",
+	"required": [
+		"name"
+	],
+	"permission": {
+		"read": true,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（文章 ID），系统自动生成"
+		},
+		"name": {
+			"bsonType": "string",
+			"description": "分类名称",
+			"label": "名称",
+			"trim": "both",
+			"minLength": 2,
+			"maxLength": 8
+		},
+		"select": {
+			"bsonType": "bool",
+			"description": "是否精选 默认为false，true为精选",
+			"defaultValue": false,
+			"label": "是否精选",
+			"trim": "both"
+		},
+		"enable": {
+			"bsonType": "bool",
+			"description": "是否启用 默认为false，true为启用",
+			"defaultValue": false,
+			"label": "是否启用",
+			"trim": "both"
+		},
+		"sort": {
+			"bsonType": "int",
+			"description": "类别显示顺序",
+			"label": "排序"
+		},
+		"picurl": {
+			"bsonType": "string",
+			"description": "缩略图地址"
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	},
+	"version": "0.0.1"
+}
