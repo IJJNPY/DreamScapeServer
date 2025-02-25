@@ -1,0 +1,65 @@
+{
+	"bsonType": "object",
+	"required": [
+		"name"
+	],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "存储ID，系统自动生成"
+		},
+		"day": {
+			"bsonType": "string",
+			"description": "每天的日期"
+		},
+		"picList": {
+			"bsonType": "array",
+			"description": "推荐图片列表",
+			"defaultValue": []
+		},
+		"theme": {
+			"bsonType": "string",
+			"description": "推荐主题"
+		},
+		"description": {
+			"bsonType": "string",
+			"description": "主题描述"
+		},
+		"checked": {
+			"bsonType": "bool",
+			"description": "是否展现：true 展现 false 不展现",
+			"defaultValue": true
+		},
+		"view_count": {
+			"bsonType": "int",
+			"description": "阅读数量",
+			"defaultValue": 100
+		},
+		"type": {
+			"bsonType": "int",
+			"description": "推荐类型",
+			"defaultValue": 0 //0壁纸 1头像
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "作者ID",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	},
+	"version": "0.0.1"
+}

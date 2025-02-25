@@ -182,6 +182,20 @@
 	{
 		"navigationBarTitleText" : "海报"
 	}
+},
+{
+	"path" : "pages/activity/daylist",
+	"style" : 
+	{
+		"navigationBarTitleText" : "每日推荐列表"
+	}
+},
+{
+	"path" : "pages/activity/dayadd",
+	"style" : 
+	{
+		"navigationBarTitleText" : "每日推荐新增"
+	}
 }
 ],
 	"subPackages": [{

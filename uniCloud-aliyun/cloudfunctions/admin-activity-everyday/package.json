@@ -1,0 +1,7 @@
+{
+  "name": "admin-activity-everyday",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

@@ -15,7 +15,7 @@
 			</view>
 		</view>
 		
-		<cropper-image ref="cropperRef" :tempurl="formData.tempurl" 
+		<cropper-image ref="cropperRef" :maxImgSize="1200" :tempurl="formData.tempurl" 
 		@confirm="cropperChange"
 		></cropper-image>
 	</view>

@@ -11,7 +11,7 @@
 				:fixedNumber="options.fixedNumber"
 				:infoTrue="options.infoTrue"
 				:full="options.full"
-				:maxImgSize="options.maxImgSize"
+				:maxImgSize="maxImgSize"
 				:fillColor="options.fillColor"
 				></VueCropper>
 			</view>
@@ -36,7 +36,13 @@ import 'vue-cropper/dist/index.css'
 import { VueCropper }  from "vue-cropper";
 import { useCropper } from './hooks';
 
-const props = defineProps(["tempurl"])
+const props = defineProps({
+	tempurl:String,
+	maxImgSize:{
+		type:Number,
+		default:3000
+	}
+})
 const newTempurl = computed(()=>props.tempurl.startsWith('http')?props.tempurl+'?t='+Date.now():props.tempurl);
 const emits = defineEmits(["confirm"])
 const popup = ref(null);

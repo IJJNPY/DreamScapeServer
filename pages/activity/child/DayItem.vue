@@ -1,32 +1,32 @@
 <template>
-	<view class="dayitem">
+	<view class="dayitem" :class="{disable:!item.checked}">
 		<view class="pic">
 			<view class="group">
-				<view class="box" v-for="pic in 5">
-					<image src="https://cdn.qingnian8.com/public/xxmBizhi/20240905/1725543485532_0_small.webp" mode="aspectFill"></image>
-				</view>
+				<view class="box" v-for="pic in item.picList.slice(0,5)">
+					<image mode="aspectFill" :src="getSmallImg(pic.picurl,140)"></image>
+				</view>				
 			</view>
 			<view class="count">
-				100人看过
+				{{item.view_count}}人看过
 			</view>
 			
-			<view class="operate">
-				<view class="btn remove" @click="remove(item._id)">
+			<view class="operate" v-if="operate">
+				<view v-if="hasPermission('DELETE_PERMISSION',item.user_id)" class="btn remove" @click="remove(item._id)">
 					<uni-icons type="trash" size="22" color="#666"></uni-icons>
 				</view>
-				<view class="btn update" @click="goEdit(item._id)">
+				<view v-if="hasPermission('UPDATE_PERMISSION',item.user_id)" class="btn update" @click="goEdit(item._id)">
 					<uni-icons type="compose" size="22" color="#666"></uni-icons>
 				</view>
 			</view>
 			
 		</view>
 		<view class="text">
-			<view class="title">主题推送名称</view>
+			<view class="title">{{item.theme || "专题名称"}} </view>
 			<view class="desc">
-				<view class="time">2024-12-30推送</view>
+				<view class="time">{{item.day || '1970-01-01'}}推送</view>
 				<view class="num">
 					<uni-icons type="image" size="23" color="#999"></uni-icons>
-					<text>15P</text>
+					<text>{{item.size || item.picList.length}}P</text>
 				</view>
 			</view>
 		</view>
@@ -34,12 +34,29 @@
 </template>
 
 <script setup>
-const remove = ()=>{
+import { routerTo, showModal, showToast } from '../../../utils/common';
+import { getSmallImg } from '../../../utils/tools';
+const emits = defineEmits(['removeSuccess'])
+const dayCloudObj = uniCloud.importObject("admin-activity-everyday")
+const props = defineProps({
+	item:Object,
+	operate:{
+		type:Boolean,
+		default:true
+	}
+})
 	
+const remove = async(id)=>{
+	let feedback = await showModal({content:"是否确认删除"});
+	if(feedback!='confirm') return;
+	let {errCode} = await dayCloudObj.remove(id)
+	if(errCode!==0) return showToast({title:"请刷新重试"})
+	showToast({title:"删除成功"})
+	emits("removeSuccess")
 }
 
-const goEdit = ()=>{
-	
+const goEdit = (id)=>{
+	routerTo("/pages/activity/dayadd?id="+id)
 }
 
 </script>
@@ -52,7 +69,8 @@ const goEdit = ()=>{
 		width: 100%;
 		aspect-ratio: 1.618 / 1;		
 		position: relative;
-		overflow: hidden;		
+		overflow: hidden;
+		background: #eee;
 		.group{
 			width: 600px;
 			height: 600px;			
@@ -156,5 +174,9 @@ const goEdit = ()=>{
 	.operate{
 		display: flex;
 	}
+}
+.disable{
+	filter: grayscale(90%);
+	opacity: 0.8;
 }
 </style>

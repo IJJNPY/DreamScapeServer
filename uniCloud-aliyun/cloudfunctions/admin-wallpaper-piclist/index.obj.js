@@ -45,6 +45,31 @@ module.exports = {
 		score_count
 		`).get({getCount:true});
 	},
+	
+	async search({size=5,current=1,classid='',keyword=''}={}){
+		size = Math.min(50,size);
+		let skip = (current-1)*size;
+		let where = {};
+		if(classid) where.classid = classid;
+		if(keyword){
+			where = {
+				...where,
+				$or:[
+					{description:{$regex:keyword,$options:'i'}},
+					{tabs:{$regex:keyword,$options:'i'}}
+				]
+			}
+		}
+		
+		const dbJQL = uniCloud.databaseForJQL({
+			clientInfo:this.getClientInfo()
+		})
+		
+		return await dbJQL.collection("wallpaper-piclist").where(where)
+		.orderBy("createTime desc").skip(skip).limit(size).field("_id,picurl").get({getCount:true});
+		
+	},
+	
 	async remove(ids = []){
 		const dbJQL = uniCloud.databaseForJQL({
 			clientInfo:this.getClientInfo()
