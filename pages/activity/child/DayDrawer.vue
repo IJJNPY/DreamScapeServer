@@ -4,7 +4,7 @@
 			<view class="layout">
 				<view class="head">
 					<view class="left">
-						<uni-data-select class="select" ref="selectRef" @change="classifyChange" collection="xxm-bizhi-classify"
+						<uni-data-select class="select" ref="selectRef" @change="classifyChange" collection="wallpaper-classify"
 						field="_id as value, name as text,sort"
 						:where="`enable == true`"
 						orderby="sort asc"

@@ -11,10 +11,10 @@
 			</view>
 			
 			<view class="operate" v-if="operate">
-				<view v-if="hasPermission('DELETE_PERMISSION',item.user_id)" class="btn remove" @click="remove(item._id)">
+				<view class="btn remove" @click="remove(item._id)">
 					<uni-icons type="trash" size="22" color="#666"></uni-icons>
 				</view>
-				<view v-if="hasPermission('UPDATE_PERMISSION',item.user_id)" class="btn update" @click="goEdit(item._id)">
+				<view class="btn update" @click="goEdit(item._id)">
 					<uni-icons type="compose" size="22" color="#666"></uni-icons>
 				</view>
 			</view>

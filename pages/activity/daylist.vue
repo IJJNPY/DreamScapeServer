@@ -1,8 +1,15 @@
 <template>
-	<view class="">
+	<view class="daylist">
 		<custom-head-top>
 			<template #left>
 				每日推荐
+			</template>
+			
+			<template #right>
+				<view class="isChecked">
+					<text>全部{{dayChecked?'启用':'禁用'}}</text>
+					<switch :checked="dayChecked" class="switchStyle" @change="dayChange"/>
+				</view>
 			</template>
 		</custom-head-top>
 		
@@ -10,25 +17,72 @@
 			<view class="item add" @click="routerTo('/pages/activity/dayadd')">
 				+
 			</view>
-			<view class="item" v-for="item in 10">
-				<DayItem></DayItem>
+			<view class="item" v-for="item in dayList" :key="item._id">
+				<DayItem :item="item" @removeSuccess="getDays()"></DayItem>
 			</view>
 		</view>
 		
 		<view class="paging">
-			分页器
+			<uni-pagination :current="params.current" :total="params.total"
+			:page-size="params.size"  :show-icon="true" @change="pageChange" />
 		</view>
 	</view>
 </template>
 
 <script setup>
-import DayItem from './child/DayItem.vue';
-import { routerTo, showToast } from "../../utils/common";
+import { ref } from "vue";
+import { routerTo, showToast} from "../../utils/common";
+import DayItem from "./child/DayItem.vue"
 
+const params = ref({
+	current:1,
+	total:0,
+	size:10
+})
+const dayList = ref([]);
+const dayChecked = ref(true);
+const dayCloudObj = uniCloud.importObject("admin-activity-everyday")
+
+uni.$on("daySuceess",()=>{
+	getDays();
+})
+
+
+const getDays = async()=>{
+	let res = await dayCloudObj.list(params.value)
+	dayList.value  = res.data;
+	params.value.total = res.count;
+	dayChecked.value = dayList.value.some(item=>item && item.checked)
+	console.log(res);
+}
+
+const pageChange = (e)=>{
+	params.value.current = e.current;
+	getDays()
+}
+
+const dayChange =async (e)=>{	
+	let {errCode} = await dayCloudObj.updateCheck(e.detail.value)
+	if(errCode!==0) return showToast({title:"请重试"})
+	showToast({title:"修改成功"})
+	getDays()
+}
+
+
+getDays()
 
 </script>
 
 <style lang="scss" scoped>
+.isChecked{
+	display: flex;
+	align-items: center;
+	text{
+		font-size: 14px;
+		color:#888;
+		margin-right: 10px;
+	}
+}
 .grid{
 	padding:20px;
 	display: grid;

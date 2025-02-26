@@ -1,7 +1,7 @@
 {
 	"bsonType": "object",
 	"required": [
-		"name"
+		"day","picList","theme"
 	],
 	"permission": {
 		"read": true,
@@ -20,7 +20,8 @@
 		"picList": {
 			"bsonType": "array",
 			"description": "推荐图片列表",
-			"defaultValue": []
+			"defaultValue": [],
+			"foreignKey": "wallpaper-piclist._id"
 		},
 		"theme": {
 			"bsonType": "string",
