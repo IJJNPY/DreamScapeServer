@@ -95,7 +95,8 @@ module.exports = {
 		description,
 		score,
 		tabs,
-		checked
+		checked,
+		classid
 		`).get({getOne:true});
 	},
 	async update(params={}){

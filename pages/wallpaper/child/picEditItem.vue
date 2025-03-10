@@ -9,6 +9,17 @@
 			</view>
 		</view>
 		<view class="right">
+			<view class="row" v-if="showClassid">
+				<view class="label">所属分类</view>
+				<uni-data-select style="width: 200px;" ref="selectRef" @change="classifyChange" collection="wallpaper-classify" 
+				field = "_id as value, name as text, sort"
+				:where="`enable == true`"
+				orderby="sort asc"
+				:clear="false"
+				placement="bottom"
+				v-model="selectValue"
+				></uni-data-select>			
+			</view>
 			<view class="row">
 				<view class="label">图片描述</view>
 				<uni-easyinput :value="item.description" @input="descChange" type="textarea" placeholder="请输入图片描述"></uni-easyinput>
@@ -35,10 +46,17 @@
 
 <script setup>
 import { ref } from 'vue';
-const props = defineProps(["item"]);
+const props = defineProps({
+	item:Object,
+	showClassid:{
+		type:Boolean,
+		default:false
+	}
+});
 const emits = defineEmits(['update:item'])
 const iptValue = ref("")
 const cropperRef = ref(null)
+const selectValue = ref(props.item.classid)
 
 //是否展现切换开关
 const checkedChange = (e) =>{
@@ -76,6 +94,10 @@ const editImg = () =>{
 //裁剪完毕图片
 const tempChange = (e) =>{
 	emits("update:item",{...props.item,tempurl:e})
+}
+
+const classifyChange = () =>{
+	emits("update:item",{...props.item,classid:selectValue.value})
 }
 </script>
 

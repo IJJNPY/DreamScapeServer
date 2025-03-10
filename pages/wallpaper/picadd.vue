@@ -16,7 +16,6 @@
 					<view class="icon">+</view>
 					<view class="text">点击选择图片</view>
 				</view>
-				<view>{{piclist}}</view>
 				<view class="setClassify" v-if="piclist.length">
 					<uni-data-select ref="selectRef" @change="classifyChange" collection="wallpaper-classify" 
 					field = "_id as value, name as text, sort"

@@ -172,8 +172,8 @@ const starSortChange = (e) =>{
 
 //分类选择
 const classifyChange = (e) =>{
-	console.log(e);
-	params.value.classid = e;
+	params.value.classid = e
+	params.value.current = 1
 	getData();
 }
 

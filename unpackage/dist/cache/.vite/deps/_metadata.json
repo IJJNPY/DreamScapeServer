@@ -1,25 +1,19 @@
 {
-  "hash": "e94b0301",
-  "configHash": "18473463",
+  "hash": "2336a373",
+  "configHash": "b64113d1",
   "lockfileHash": "0e747c18",
-  "browserHash": "1863d0f7",
+  "browserHash": "0c3b883a",
   "optimized": {
     "dayjs": {
       "src": "../../../../../node_modules/dayjs/dayjs.min.js",
       "file": "dayjs.js",
-      "fileHash": "3e111131",
+      "fileHash": "da864b53",
       "needsInterop": true
     },
     "vue-cropper": {
       "src": "../../../../../node_modules/vue-cropper/dist/vue-cropper.es.js",
       "file": "vue-cropper.js",
-      "fileHash": "00a0f38e",
-      "needsInterop": false
-    },
-    "vue-draggable-next": {
-      "src": "../../../../../node_modules/vue-draggable-next/dist/vue-draggable-next.esm-bundler.js",
-      "file": "vue-draggable-next.js",
-      "fileHash": "b7d1c37f",
+      "fileHash": "dd7f0795",
       "needsInterop": false
     }
   },
