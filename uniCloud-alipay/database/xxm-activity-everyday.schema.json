@@ -1,0 +1,66 @@
+{
+	"bsonType": "object",
+	"required": [
+		"day","picList","theme"
+	],
+	"permission": {
+		"read": true,
+		"create": "'manage' in auth.role",
+		"update": "'UPDATE_PERMISSION' in auth.permission || doc.user_id == auth.uid",
+		"delete": "'UPDATE_PERMISSION' in auth.permission || doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（文章 ID），系统自动生成"
+		},
+		"day": {
+			"bsonType": "string",
+			"description": "每天的日期" //2025-01-23			
+		},
+		"picList":{
+			"bsonType": "array",
+			"description": "推荐图片列表",
+			"defaultValue":[],
+			"foreignKey": "xxm-bizhi-piclist._id"
+		},		
+		"theme": {
+			"bsonType": "string",
+			"description": "推荐主题"			
+		},
+		"description": {
+			"bsonType": "string",
+			"description": "主题描述"			
+		},
+		"checked":{
+			"bsonType": "bool",
+			"description": "是否可见",
+			"defaultValue":true
+		},
+		"view_count":{
+			"bsonType": "int",
+			"description": "查看数",
+			"defaultValue":100
+		},
+		"type":{
+			"bsonType": "int",
+			"description": "推荐类型",
+			"defaultValue":0  //0壁纸 1头像
+		},		
+		"user_id": {
+			"bsonType": "string",
+			"description": "作者ID， 参考`uni-id-users` 表",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	},
+	"version": "0.0.1"
+}

@@ -1,0 +1,57 @@
+{
+	"bsonType": "object",
+	"required": [
+		
+	],
+	"permission": {
+		"read": "auth.uid != null",
+		"create": "auth.uid != null",
+		"update": "'UPDATE_PERMISSION' in auth.permission || doc.user_id == auth.uid",
+		"delete": "'DELETE_PERMISSION' in auth.permission || doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（文章 ID），系统自动生成"
+		},
+		"classid": {
+			"bsonType": "string",
+			"title": "分类",
+			"description": "分类 id，参考`xxm-bizhi-classify`表",
+			"foreignKey": "xxm-bizhi-classify._id"			
+		},
+		"picid": {
+			"bsonType": "string",
+			"title": "分类",
+			"description": "分类 id，参考`xxm-bizhi-piclist`表",
+			"foreignKey": "xxm-bizhi-piclist._id"			
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "作者ID， 参考`uni-id-users` 表",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"userScore":{			
+			"trim": "both",
+			"bsonType": "string",
+			"description": "等级评分"
+		},
+		"ip":{
+			"bsonType": "string",
+			"description": "评论发表时 IP 地址",
+			"forceDefaultValue": {
+				"$env": "clientIP"
+			}
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	},
+	"version": "0.0.1"
+}

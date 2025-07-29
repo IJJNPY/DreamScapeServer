@@ -1,0 +1,21 @@
+{
+    "name": "admin-data-usage",
+    "dependencies": {
+        "dayjs": "^1.11.13"
+    },
+    "extensions": {
+        "uni-cloud-jql": []
+    },
+    "cloudfunction-config": {
+        "memorySize": 512,
+        "timeout": 61,
+        "triggers": [{
+        	"name": "myTrigger",			
+        	"type": "timer",			
+        	"config": "5 0 * * * * *"
+        }],
+        "path": "",
+        "runtime": "Nodejs18",
+        "concurrency": 5
+    }
+}

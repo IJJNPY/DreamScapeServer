@@ -1,0 +1,81 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"brand":{
+			"bsonType": "string",			
+			"description": "品牌名称",
+			"maxLength": 20
+		},
+		"logo":{
+			"bsonType": "string",
+			"description": "品牌标志"
+		},
+		"checkedAd":{
+			"bsonType": "bool",
+			"description": "是否启用广告：true展现 false不展现",
+			"defaultValue": true
+		},
+		"rewardedVideo":{
+			"bsonType": "string",
+			"description": "激励视频广告id"
+		},
+		"cardVideo":{
+			"bsonType": "string",
+			"description": "卡片广告位"
+		},
+		"dayCoin":{
+			"bsonType": "int",
+			"description": "每日领币数",
+			"defaultValue":10
+		},
+		"adCoin":{
+			"bsonType": "int",
+			"description": "看广告得币数",
+			"defaultValue":30
+		},
+		"ruleCoin":{
+			"bsonType": "string",
+			"description": "硬币使用规则",
+			"maxLength": 300
+		},
+		"hots":{
+			"bsonType": "string",
+			"description": "热门搜索词"
+		},
+		"copyright":{
+			"bsonType": "string",
+			"description": "版权信息",
+			"maxLength": 300
+		},
+		"service":{
+			"bsonType": "string",
+			"description": "服务协议",
+			"maxLength": 1000
+		},
+		"privacy":{
+			"bsonType": "string",
+			"description": "隐私政策",
+			"maxLength": 1000
+		},
+		"updateTime":{
+			"bsonType": "timestamp",
+			"title": "发表时间",
+			"description": "发表时间",
+			"defaultValue": {
+				"$env": "now"
+			}
+		}
+		
+	}
+}

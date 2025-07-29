@@ -12,6 +12,7 @@ export default {
 		inited: false,
 		navMenu: [],
 		routes: [],
+		logo:"",
 		theme: uni.getStorageSync(uniAdminCacheKey.theme) || 'default',
 		// #ifndef VUE3
 		appName: process.env.VUE_APP_NAME || '',
@@ -25,6 +26,9 @@ export default {
 	mutations: {
 		SET_APP_NAME: (state, appName) => {
 			state.appName = appName
+		},
+		SET_APP_LOGO: (state, logo) => {
+			state.logo = logo
 		},
 		SET_NAV_MENU: (state, navMenu) => {
 			state.inited = true
@@ -50,6 +54,9 @@ export default {
 		}) {
 			// 初始化获取用户信息
 			dispatch('user/getUserInfo', null, {
+				root: true
+			})
+			dispatch('system/getSysConfig', null, {
 				root: true
 			})
 		},

@@ -15,6 +15,7 @@
 				:fillColor="options.fillColor"
 				></VueCropper>
 			</view>
+			
 			<view class="function">
 				<view @click="editImg(item.type)" class="item" v-for="item in fnConfig" :key="item.type">
 					<text class="iconfont" :class="item.icon" v-if="item.icon"></text>
@@ -31,10 +32,12 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import 'vue-cropper/dist/index.css'
 import { VueCropper }  from "vue-cropper";
-import { useCropper } from './hooks';
+import {useCropper} from "./hooks.js"
+
+
 
 const props = defineProps({
 	tempurl:String,
@@ -42,53 +45,59 @@ const props = defineProps({
 		type:Number,
 		default:3000
 	}
-})
-const newTempurl = computed(()=>props.tempurl.startsWith('http')?props.tempurl+'?t='+Date.now():props.tempurl);
-const emits = defineEmits(["confirm"])
+});
+const newTempurl = computed(()=>props.tempurl.startsWith('http')?props.tempurl+'?t='+Date.now() :props.tempurl )
+
+const emits = defineEmits(["confirm"]);
 const popup = ref(null);
 const cropperRef = ref(null);
-const { options,fnConfig,editImg } = useCropper(cropperRef);
 
-const open = () =>{
-	popup.value.open();
+const {options,fnConfig,editImg} = useCropper(cropperRef);
+
+
+const open = ()=>{
+	popup.value.open()
 }
 
-const close = () =>{
-	popup.value.close();
+const close = ()=>{
+	popup.value.close()
 }
 
-const confirm = () =>{
-	cropperRef.value.getCropBlob(data=>{
-		emits("confirm",URL.createObjectURL(data))
+const confirm = ()=>{
+	 cropperRef.value.getCropBlob(data=>{
+		emits("confirm",URL.createObjectURL(data))	
 		close();
-	})
+	 })
 }
 
 defineExpose({
 	open,
 	close
 })
+
+
 </script>
 
 <style lang="scss" scoped>
 .popup{
-	width: 500px;
+	width: 520px;
 	background: #fff;
 	border-radius: 10px;
 	min-height: 300px;
-	padding: 20px;
+	padding:20px;
 	.cropper{
 		width: 100%;
 		aspect-ratio: 1 / 1;
 	}
+	
 	.function{
-		padding: 20px 0;
+		padding:20px 0;
 		display: flex;
-		gap: 10px;
+		gap:10px;
 		.item{
-			border: 1px solid #2979ff;
-			color: #2979ff;
-			padding: 5px 10px;
+			border:1px solid #2979FF;
+			color:#2979FF;
+			padding:5px 10px;
 			font-size: 14px;
 			cursor: pointer;
 			user-select: none;
@@ -97,5 +106,7 @@ defineExpose({
 			transform: scale(0.96);
 		}
 	}
+	
+	
 }
 </style>

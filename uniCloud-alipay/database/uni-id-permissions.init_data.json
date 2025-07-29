@@ -1,0 +1,30 @@
+[
+    {
+        "_id": "677d3736a1c0c62b7c12a9fb",
+        "comment": "",
+        "create_date": 1736259382460,
+        "permission_id": "ADD_PERMISSION",
+        "permission_name": "新增"
+    },
+    {
+        "_id": "677d373f6de8117c945d8daa",
+        "comment": "",
+        "create_date": 1736259392112,
+        "permission_id": "DELETE_PERMISSION",
+        "permission_name": "删除"
+    },
+    {
+        "_id": "677d374aeaef49b208988f65",
+        "comment": "",
+        "create_date": 1736259402767,
+        "permission_id": "UPDATE_PERMISSION",
+        "permission_name": "修改"
+    },
+    {
+        "_id": "677d3754b072adac9865c14c",
+        "comment": "",
+        "create_date": 1736259412767,
+        "permission_id": "READ_PERMISSION",
+        "permission_name": "读取"
+    }
+]

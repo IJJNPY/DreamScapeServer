@@ -2,8 +2,8 @@
 	<view class="dayadd">
 		<custom-head-top>
 			<template #left>
-				编辑
-			</template>
+				{{typename}}
+			</template>					
 		</custom-head-top>
 		
 		<view class="main">
@@ -52,8 +52,12 @@
 								<view class="item add" @click="handelAssociation">
 									<uni-icons type="link" size="40" color="#666"></uni-icons>
 								</view>
+								
+								
 							</VueDraggableNext>
 						</uni-forms-item>
+						
+												
 						
 						<uni-forms-item >
 							<view class="popupBtnGroup">
@@ -74,14 +78,13 @@
 	</view>
 	
 	<DayDrawer ref="drawerRef" v-model:useSelect="formData.picList"></DayDrawer>
-	
 </template>
 
 <script setup>
 import {computed, ref} from "vue";
 import { VueDraggableNext } from 'vue-draggable-next'
-import DayItem from "./child/DayItem.vue"
-import DayDrawer from "./child/DayDrawer.vue"
+import DayItem from "./children/DayItem.vue"
+import DayDrawer from "./children/DayDrawer.vue"
 import { getSmallImg } from "../../utils/tools";
 import {onLoad} from "@dcloudio/uni-app"
 import { showToast } from "../../utils/common";
@@ -178,6 +181,7 @@ const getDayItem = async()=>{
    formData.value = data[0];
    console.log(data);
 }
+
 </script>
 
 <style lang="scss" scoped>

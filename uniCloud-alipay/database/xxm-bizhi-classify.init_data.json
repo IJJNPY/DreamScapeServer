@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "xxm-bizhi-classify-id-1",
+        "createTime": 1736775108260,
+        "enable": true,
+        "name": "AI美图",
+        "picurl": "https://env-00jxhjzm8bqo.normal.cloudstatic.cn/wallpaper/20241207/1733566443834.webp",
+        "select": true,
+        "sort": 2,
+		"user_id": "_uni_starter_test_user_id"
+    },
+	{
+	    "_id": "xxm-bizhi-classify-id-2",
+	    "createTime": 1736775118260,
+	    "enable": true,
+	    "name": "可爱萌宠",
+	    "picurl": "https://env-00jxhjzm8bqo.normal.cloudstatic.cn/wallpaper/20241212/1734005649254.webp",
+	    "select": true,
+	    "sort": 3,
+		"user_id": "_uni_starter_test_user_id"
+	}
+]

@@ -16,8 +16,8 @@
 <style lang="scss" scoped>
 .custom-head-top{
 	height: 70px;
-	padding: 0 20px;
-	border-bottom: 1px solid #eee;
+	padding:0 20px;
+	border-bottom:1px solid #eee;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -27,7 +27,7 @@
 	}
 	.right{
 		display: flex;
-		gap: 10px;
+		gap:15px;
 	}
 }
 </style>

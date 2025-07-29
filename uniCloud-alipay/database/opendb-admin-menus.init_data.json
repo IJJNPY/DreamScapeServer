@@ -1,0 +1,337 @@
+[
+    {
+        "_id": "673b493243dd3d40eed63b6f",
+        "create_date": 1731938610474,
+        "enable": true,
+        "icon": "iconfont icon-snippets-fill",
+        "menu_id": "bizhi",
+        "name": "壁纸管理",
+        "parent_id": "",
+        "permission": [],
+        "sort": 1100,
+        "url": ""
+    },
+    {
+        "_id": "673b495049d160dcfa9e23e6",
+        "create_date": 1731938639965,
+        "enable": true,
+        "icon": "iconfont icon-appstore",
+        "menu_id": "bizhi-classify",
+        "name": "分类管理",
+        "parent_id": "bizhi",
+        "permission": [
+            "ADD_PERMISSION",
+            "READ_PERMISSION"
+        ],
+        "sort": 1,
+        "url": "/pages/bizhi/classify"
+    },
+    {
+        "_id": "6741e698c4261cd2b4ad7f87",
+        "create_date": 1732372120044,
+        "enable": true,
+        "icon": "iconfont icon-file-image",
+        "menu_id": "bizhi-list",
+        "name": "壁纸列表",
+        "parent_id": "bizhi",
+        "permission": [
+            "ADD_PERMISSION",
+            "READ_PERMISSION"
+        ],
+        "sort": 2,
+        "url": "/pages/bizhi/piclist"
+    },
+    {
+        "_id": "6741e6c76f506e5009fb8fc7",
+        "create_date": 1732372167917,
+        "enable": true,
+        "icon": "iconfont icon-file-add",
+        "menu_id": "bizhi-add",
+        "name": "新增壁纸",
+        "parent_id": "bizhi",
+        "permission": [
+            "ADD_PERMISSION",
+            "READ_PERMISSION"
+        ],
+        "sort": 3,
+        "url": "/pages/bizhi/picadd"
+    },
+    {
+        "_id": "674f0dc8d212f86ab7b27338",
+        "create_date": 1733234120042,
+        "enable": true,
+        "icon": "iconfont icon-flag-fill",
+        "menu_id": "xxm-activity",
+        "name": "营销推广",
+        "parent_id": "",
+        "permission": [],
+        "sort": 1300,
+        "url": ""
+    },
+    {
+        "_id": "674f0e8d3476eeb8e236ee27",
+        "create_date": 1733234317352,
+        "enable": true,
+        "icon": "iconfont icon-group",
+        "menu_id": "xxm-activity-banner",
+        "name": "首页海报",
+        "parent_id": "xxm-activity",
+        "permission": [
+            "ADD_PERMISSION",
+            "READ_PERMISSION"
+        ],
+        "sort": 1,
+        "url": "/pages/activity/banner"
+    },
+    {
+        "_id": "6752f86a5e768200ac090b4a",
+        "create_date": 1733490795461,
+        "enable": true,
+        "icon": "iconfont icon-calendar",
+        "menu_id": "activity-daylist",
+        "name": "每日推荐",
+        "parent_id": "xxm-activity",
+        "permission": [
+            "ADD_PERMISSION",
+            "READ_PERMISSION"
+        ],
+        "sort": 2,
+        "url": "/pages/activity/daylist"
+    },
+    {
+        "_id": "67677ab76dd5eb240e89a2d6",
+        "create_date": 1734834872336,
+        "enable": true,
+        "icon": "iconfont icon-areachart",
+        "menu_id": "data-record",
+        "name": "数据统计",
+        "parent_id": "",
+        "permission": [],
+        "sort": 1200,
+        "url": ""
+    },
+    {
+        "_id": "67677b386dd5eb240e89a957",
+        "create_date": 1734835001425,
+        "enable": true,
+        "icon": "iconfont icon-download",
+        "menu_id": "download-record",
+        "name": "下载记录",
+        "parent_id": "data-record",
+        "permission": [],
+        "sort": 2,
+        "url": "/pages/data/download-record"
+    },
+    {
+        "_id": "67678a45d8ac54dc9bbef992",
+        "create_date": 1734838854220,
+        "enable": true,
+        "icon": "iconfont icon-star",
+        "menu_id": "score-record",
+        "name": "评分记录",
+        "parent_id": "data-record",
+        "permission": [],
+        "sort": 3,
+        "url": "/pages/data/score-record"
+    },
+    {
+        "_id": "6767b53887ebec1bdba3d6b1",
+        "create_date": 1734849849871,
+        "enable": true,
+        "icon": "iconfont icon-control",
+        "menu_id": "system-config",
+        "name": "项目配置",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1050,
+        "url": "/pages/system/config/config"
+    },
+    {
+        "_id": "676d73ccc737281b5df38653",
+        "create_date": 1735226316522,
+        "enable": true,
+        "icon": "iconfont icon-Dollar",
+        "menu_id": "coin-record",
+        "name": "硬币记录",
+        "parent_id": "data-record",
+        "permission": [],
+        "sort": 4,
+        "url": "/pages/data/coin-record"
+    },
+    {
+        "_id": "676f59f5531f7fed99e9b5a7",
+        "create_date": 1735350773922,
+        "enable": true,
+        "icon": "iconfont icon-piechart",
+        "menu_id": "data-index",
+        "name": "数据概览",
+        "parent_id": "data-record",
+        "permission": [
+            "ADD_PERMISSION",
+            "READ_PERMISSION"
+        ],
+        "sort": 1,
+        "url": "/pages/data/data-index"
+    },
+    {
+        "_id": "67792fce4eeb0199920f70e1",
+        "create_date": 1735995343295,
+        "enable": true,
+        "icon": "iconfont icon-notification",
+        "menu_id": "notice-list",
+        "name": "通知公告",
+        "parent_id": "xxm-activity",
+        "permission": [
+            "ADD_PERMISSION",
+            "READ_PERMISSION"
+        ],
+        "sort": 3,
+        "url": "/pages/activity/noticeList"
+    },
+    {
+        "_id": "677e2274b072adac98719139",
+        "create_date": 1736319604735,
+        "enable": true,
+        "icon": "iconfont icon-api",
+        "menu_id": "usage-record",
+        "name": "使用记录",
+        "parent_id": "data-record",
+        "permission": [],
+        "sort": 5,
+        "url": "/pages/data/usage-record"
+    },
+    {
+        "_id": "index",
+        "create_date": 1602662469396,
+        "enable": true,
+        "icon": "iconfont icon-home-fill",
+        "menu_id": "index",
+        "name": "首页",
+        "parent_id": "",
+        "permission": [
+            "READ_PERMISSION"
+        ],
+        "sort": 100,
+        "url": "/"
+    },
+    {
+        "_id": "safety_statistics",
+        "create_date": 1638356430871,
+        "enable": true,
+        "icon": "iconfont icon-safetycertificate-f",
+        "menu_id": "safety_statistics",
+        "name": "安全审计",
+        "parent_id": "",
+        "permission": [],
+        "sort": 3100,
+        "url": ""
+    },
+    {
+        "_id": "safety_statistics_user_log",
+        "create_date": 1638356430871,
+        "enable": true,
+        "icon": "icon-solution iconfont",
+        "menu_id": "safety_statistics_user_log",
+        "name": "用户日志",
+        "parent_id": "safety_statistics",
+        "permission": [],
+        "sort": 3101,
+        "url": "/pages/system/safety/list"
+    },
+    {
+        "_id": "system_app",
+        "create_date": 1602662469399,
+        "enable": true,
+        "icon": "icon-desktop iconfont",
+        "menu_id": "system_app",
+        "name": "应用管理",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1035,
+        "url": "/pages/system/app/list"
+    },
+    {
+        "_id": "system_management",
+        "create_date": 1602662469396,
+        "enable": true,
+        "icon": "iconfont icon-setting-fill",
+        "menu_id": "system_management",
+        "name": "系统管理",
+        "parent_id": "",
+        "permission": [],
+        "sort": 1000,
+        "url": ""
+    },
+    {
+        "_id": "system_menu",
+        "create_date": 1602662469396,
+        "enable": true,
+        "icon": "icon-menu iconfont",
+        "menu_id": "system_menu",
+        "name": "菜单管理",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1040,
+        "url": "/pages/system/menu/list"
+    },
+    {
+        "_id": "system_permission",
+        "create_date": 1602662469396,
+        "enable": true,
+        "icon": "icon-audit iconfont",
+        "menu_id": "system_permission",
+        "name": "权限管理",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1030,
+        "url": "/pages/system/permission/list"
+    },
+    {
+        "_id": "system_role",
+        "create_date": 1602662469397,
+        "enable": true,
+        "icon": "icon-apartment iconfont",
+        "menu_id": "system_role",
+        "name": "角色管理",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1020,
+        "url": "/pages/system/role/list"
+    },
+    {
+        "_id": "system_tag",
+        "create_date": 1602662479389,
+        "enable": true,
+        "icon": "icon-tags iconfont",
+        "menu_id": "system_tag",
+        "name": "标签管理",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1037,
+        "url": "/pages/system/tag/list"
+    },
+    {
+        "_id": "system_update",
+        "create_date": 1656491532434,
+        "enable": true,
+        "icon": "icon-cloud-upload iconfont",
+        "menu_id": "system_update",
+        "name": "App升级中心",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1036,
+        "url": "/uni_modules/uni-upgrade-center/pages/version/list"
+    },
+    {
+        "_id": "system_user",
+        "create_date": 1602662469398,
+        "enable": true,
+        "icon": "iconfont icon-team",
+        "menu_id": "system_user",
+        "name": "用户管理",
+        "parent_id": "system_management",
+        "permission": [],
+        "sort": 1010,
+        "url": "/pages/system/user/list"
+    }
+]

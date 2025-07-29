@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "674346d0b44cda28ed58d3f6",
+        "appid": "__UNI__7B8625F",
+        "create_date": 1732462288410,
+        "description": "admin 管理后台",
+        "name": "咸虾米壁纸-后台管理"
+    },
+    {
+        "_id": "6759abb30a05c0925949789c",
+        "appid": "__UNI__B8FCDB7",
+        "create_date": 1733929907573,
+        "description": "",
+        "icon_url": "",
+        "introduction": "",
+        "name": "咸虾米壁纸_客户端",
+        "screenshot": [],
+        "store_list": []
+    }
+]

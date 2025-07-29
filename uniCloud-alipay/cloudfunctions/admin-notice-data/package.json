@@ -1,0 +1,7 @@
+{
+  "name": "admin-notice-data",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

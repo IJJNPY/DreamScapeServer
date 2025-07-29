@@ -5,10 +5,11 @@
 				每日推荐
 			</template>
 			
+			
 			<template #right>
 				<view class="isChecked">
 					<text>全部{{dayChecked?'启用':'禁用'}}</text>
-					<switch :checked="dayChecked" class="switchStyle" @change="dayChange"/>
+					<switch :disabled="!hasPermission('UPDATE_PERMISSION')" :checked="dayChecked" class="switchStyle" @change="dayChange"/>
 				</view>
 			</template>
 		</custom-head-top>
@@ -22,17 +23,20 @@
 			</view>
 		</view>
 		
+		
 		<view class="paging">
 			<uni-pagination :current="params.current" :total="params.total"
 			:page-size="params.size"  :show-icon="true" @change="pageChange" />
 		</view>
+		
+		
 	</view>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { routerTo, showToast} from "../../utils/common";
-import DayItem from "./child/DayItem.vue"
+import { routerTo, showToast,hasPermission } from "../../utils/common";
+import DayItem from "./children/DayItem.vue"
 
 const params = ref({
 	current:1,
@@ -71,9 +75,10 @@ const dayChange =async (e)=>{
 
 getDays()
 
+
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped>	
 .isChecked{
 	display: flex;
 	align-items: center;

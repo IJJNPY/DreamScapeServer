@@ -1,0 +1,7 @@
+{
+  "name": "admin-bizhi-classify",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

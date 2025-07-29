@@ -1,6 +1,13 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path" : "pages/data/data-index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "数据概览"
+			}
+		},
+		{
 			"path": "pages/index/index"
 		},
 		{
@@ -156,45 +163,88 @@
     }
 },
 {
-	"path" : "pages/wallpaper/classify",
+	"path" : "pages/bizhi/classify",
 	"style" : 
 	{
-		"navigationBarTitleText" : "分类"
+		"navigationBarTitleText" : "分类管理"
 	}
 },
 {
-	"path" : "pages/wallpaper/picadd",
-	"style" : 
-	{
-		"navigationBarTitleText" : "壁纸新增"
-	}
-},
-{
-	"path" : "pages/wallpaper/piclist",
+	"path" : "pages/bizhi/piclist",
 	"style" : 
 	{
 		"navigationBarTitleText" : "壁纸列表"
 	}
 },
 {
+	"path" : "pages/bizhi/picadd",
+	"style" : 
+	{
+		"navigationBarTitleText" : "新增壁纸"
+	}
+},
+{
 	"path" : "pages/activity/banner",
 	"style" : 
 	{
-		"navigationBarTitleText" : "海报"
+		"navigationBarTitleText" : ""
 	}
 },
 {
 	"path" : "pages/activity/daylist",
 	"style" : 
 	{
-		"navigationBarTitleText" : "每日推荐列表"
+		"navigationBarTitleText" : ""
 	}
 },
 {
 	"path" : "pages/activity/dayadd",
 	"style" : 
 	{
-		"navigationBarTitleText" : "每日推荐新增"
+		"navigationBarTitleText" : ""
+	}
+},
+{
+	"path" : "pages/data/download-record",
+	"style" : 
+	{
+		"navigationBarTitleText" : "下载记录"
+	}
+},
+{
+	"path" : "pages/data/score-record",
+	"style" : 
+	{
+		"navigationBarTitleText" : "下载记录"
+	}
+},
+{
+	"path" : "pages/data/coin-record",
+	"style" : 
+	{
+		"navigationBarTitleText" : "硬币记录"
+	}
+},
+{
+	"path" : "pages/activity/noticeList",
+	"style" : 
+	{
+		"navigationBarTitleText" : "公告列表"
+	}
+},
+{
+	"path" : "pages/activity/noticeEdit",
+	"style" : 
+	{
+		"navigationBarTitleText" : "编辑公告",
+		"navigationStyle": "default"
+	}
+},
+{
+	"path" : "pages/data/usage-record",
+	"style" : 
+	{
+		"navigationBarTitleText" : "使用记录"
 	}
 }
 ],
@@ -322,6 +372,13 @@
 					"path": "safety/list",
 					"style": {
 						"navigationBarTitleText": "用户日志"
+					}
+				},
+				{
+					"path" : "config/config",
+					"style" : 
+					{
+						"navigationBarTitleText" : "项目配置"
 					}
 				}
 			]

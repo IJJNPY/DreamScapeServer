@@ -1,0 +1,10 @@
+{
+  "name": "client-user-action",
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "custom-utils": "file:../common/custom-utils"
+  },
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

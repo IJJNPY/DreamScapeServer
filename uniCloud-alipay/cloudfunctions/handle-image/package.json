@@ -1,0 +1,9 @@
+{
+  "name": "handle-image",
+  "dependencies": {
+    "custom-utils": "file:../common/custom-utils"
+  },
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

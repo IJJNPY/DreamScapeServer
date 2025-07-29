@@ -1,16 +1,17 @@
-import { computed, nextTick, ref } from 'vue';
+import { ref ,nextTick} from 'vue';
 
 export function useCropper(cropperRef){
 	const options = ref({
 		outputType:"webp",
 		autoCrop:true,
-		fixed:true,
+		fixed:false,
 		fixedNumber:[9,16],
 		infoTrue:true,
 		full:true,
 		maxImgSize:3000,
 		fillColor:"#000"
-	});
+	})
+	
 	
 	const fnConfig = ref([
 		{type:"auto",text:"自由裁剪",icon:"icon-expend"},
@@ -21,40 +22,41 @@ export function useCropper(cropperRef){
 		{type:"rotate",text:"向右旋转",icon:"icon-rotate-right"},
 		{type:"zoomin",text:"放大",icon:"icon-zoomin"},
 		{type:"zoomout",text:"缩小",icon:"icon-zoomout"}
-	]);
+	])
 	
-	const editImg = (type) =>{
-		if(type=="rotate") return cropperRef.value.rotateRight();
-		if(type=="zoomin") return cropperRef.value.changeScale();
-		if(type=="zoomout") return cropperRef.value.changeScale(-1);
-		
-		if(type=='auto'){
-			options.value.fixed = false;
-		}
-		if(type=='1/1'){
-			options.value.fixed = true;
-			options.value.fixedNumber = [1,1];
-		}
-		if(type=='9/16'){
-			options.value.fixed = true;
-			options.value.fixedNumber = [9,16];
-		}
-		if(type=='9/20'){
-			options.value.fixed = true;
-			options.value.fixedNumber = [9,20];
-		}
-		if(type=='16/9'){
-			options.value.fixed = true;
-			options.value.fixedNumber = [16,9];
-		}
-		nextTick(()=>{
-			cropperRef.value.goAutoCrop();
-		})
-		
+	
+	
+	const editImg = (type) => {
+	  switch (type) {
+	    case "rotate":
+	      return cropperRef.value.rotateRight();
+	    case "zoomin":
+	      return cropperRef.value.changeScale();
+	    case "zoomout":
+	      return cropperRef.value.changeScale(-1);
+	    case "auto":
+	      options.value.fixed = false;
+	      break;
+	    case "1/1":
+	    case "9/16":
+	    case "9/20":
+	    case "16/9":
+	      options.value.fixed = true;
+	      const ratio = fnConfig.value.find(find => find.type === type).text.split("/");
+	      options.value.fixedNumber = ratio;
+	      break;
+	    default:
+	      // 可以在这里处理其他情况或者不处理
+	      break;
+	  }
+	  nextTick(() => {
+	    cropperRef.value.goAutoCrop();
+	  });
 	};
 	
 	
-	return{
+	
+	return {
 		options,
 		fnConfig,
 		editImg

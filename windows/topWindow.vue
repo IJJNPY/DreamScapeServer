@@ -106,7 +106,7 @@
 			}
 		},
 		computed: {
-			...mapState('app', ['appName', 'routes', 'theme']),
+			...mapState('app', ['appName','logo', 'routes', 'theme']),
 			...mapState('error', ['logs']),
 			userInfo () {
 				return this.$uniIdPagesStore.store.userInfo
@@ -126,7 +126,7 @@
 			// #endif
 
 			// #ifdef H5
-			let locale = uni.getLocale();
+			let locale = uni.getLocale();			
 			this.$nextTick(() => {
 				let index = this.langs.findIndex((item) => {
 					return item.lang === locale;
@@ -172,6 +172,7 @@
 				})
 			},
 			changeLanguage(e) {
+				console.log(e);
 				let index = typeof e === 'object' ? e.detail.value : e
 				if (!index || index < 0) index = 0;
 				const lang = this.langs[index].lang || 'zh-Hans'

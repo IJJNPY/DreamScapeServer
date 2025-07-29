@@ -1,0 +1,19 @@
+[{
+	"_id":"xxm-notice-dygx",
+	"title":"订阅更新",
+	"content":"主体内容",
+	"select":false,
+	"checked":true,
+	"createTime":1736092073000,
+	"view_count":100,
+	"user_id":"_uni_starter_test_user_id"
+},{
+	"_id":"xxm-notice-cjwt",
+	"title":"常见问题",
+	"content":"主体内容",
+	"select":false,
+	"checked":true,
+	"createTime":1736256503000,
+	"view_count":100,
+	"user_id":"_uni_starter_test_user_id"
+}]

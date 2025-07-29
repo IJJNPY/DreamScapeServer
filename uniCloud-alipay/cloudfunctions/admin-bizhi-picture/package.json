@@ -1,0 +1,9 @@
+{
+  "name": "admin-bizhi-picture",
+  "dependencies": {
+    "custom-utils": "file:../common/custom-utils"
+  },
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

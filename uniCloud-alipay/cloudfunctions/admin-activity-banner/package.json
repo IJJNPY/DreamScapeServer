@@ -1,0 +1,7 @@
+{
+  "name": "admin-activity-obj",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

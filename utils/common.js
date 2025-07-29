@@ -1,7 +1,6 @@
-import dayjs from "dayjs"
-import { compressImage } from "./tools"
-
-export function showToast({title="", duration=1500, icon="none", mask=false}={}){
+import {compressAndConvertToWebP} from "./tools.js"
+import dayjs from "dayjs";
+export function showToast({title="",duration=1500,icon="none",mask=false}={}){
 	uni.showToast({
 		title:String(title),
 		icon,
@@ -10,6 +9,8 @@ export function showToast({title="", duration=1500, icon="none", mask=false}={})
 	})
 }
 
+
+
 //显示模态弹窗
 export function showModal({content="",showCancel=true}={}){
 	return new Promise((resolve,reject)=>{
@@ -17,28 +18,28 @@ export function showModal({content="",showCancel=true}={}){
 			title:"提示",
 			content,
 			showCancel,
-			success:({confirm}) => {
-				if(confirm) resolve('confirm')
-				else resolve('cancel')
+			success: ({confirm}) => {
+			  if (confirm) resolve('confirm')
+			  else resolve('cancel')
 			},
 			fail: () => {
-				reject('fail')
+			  reject('fail')
 			}
 		})
 	})
 }
 
-//封装跳转方法
+//路由跳转方法
 export const routerTo = (url,type='navigate')=>{
-	if(type === 'navigate'){
+	if(type === "navigate"){
 		uni.navigateTo({
 			url
 		})
-	}else if(type === 'redirect'){
+	}else if(type==='redirect'){
 		uni.redirectTo({
 			url
 		})
-	}else if(type === 'reLaunch'){
+	}else if(type==="reLaunch"){
 		uni.reLaunch({
 			url
 		})
@@ -47,23 +48,33 @@ export const routerTo = (url,type='navigate')=>{
 	}
 }
 
-export function previewImg(url){
+
+export function previewImg(url){	
 	if(!url) return;
 	uni.previewImage({
 		urls:[url]
 	})
 }
 
-export const uploadFileItem = async(url) =>{
-	let tempurl = await compressImage(url)
-	return uniCloud.uploadFile({
-		filePath: tempurl,
-		cloudPath: "wallpaper/"+dayjs().format("YYYYMMDD")+"/"+Date.now()+".webp",
-		//阿里云必须要设置，腾讯云和支付宝云不需要
-		cloudPathAsRealPath: true
+//上传一张图片
+export const uploadFileItem = async(url,rootPath="wallpaper")=>{
+	let tempurl = await compressAndConvertToWebP(url);	
+	return await uniCloud.uploadFile({
+		filePath:tempurl,
+		cloudPath:rootPath+"/"+dayjs().format("YYYYMMDD")+"/"+Date.now()+".webp"
 	})
 }
 
-export const uploadFileGroup = async(url) =>{
 
+export const uploadFileGroup = async(url)=>{
+	
 }
+
+
+export function hasPermission(value,user_id=null){
+	let {permission=[],role=[],uid=""} = uniCloud.getCurrentUserInfo()
+	return role.includes("admin") || permission.includes(value) || user_id == uid
+}
+
+
+

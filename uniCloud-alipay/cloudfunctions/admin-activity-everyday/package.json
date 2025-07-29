@@ -1,0 +1,21 @@
+{
+    "name": "admin-activity-everyday",
+    "dependencies": {
+        "dayjs": "^1.11.13"
+    },
+    "extensions": {
+        "uni-cloud-jql": []
+    },
+    "cloudfunction-config": {
+        "memorySize": 512,
+        "timeout": 61,
+        "triggers": [
+			{	 
+			   "config": "0 0 0 * * * *"
+			}
+		],
+        "path": "",
+        "runtime": "Nodejs18",
+        "concurrency": 5
+    }
+}

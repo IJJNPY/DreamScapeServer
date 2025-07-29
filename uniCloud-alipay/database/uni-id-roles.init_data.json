@@ -1,0 +1,10 @@
+[
+    {
+        "_id": "673807bb8843b72483f3ca25",
+        "comment": "超级管理员拥有所有权限",
+        "create_date": 0,
+        "permission": [],
+        "role_id": "admin",
+        "role_name": "超级管理员"
+    }
+]

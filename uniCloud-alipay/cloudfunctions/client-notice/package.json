@@ -1,0 +1,7 @@
+{
+  "name": "client-notice",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

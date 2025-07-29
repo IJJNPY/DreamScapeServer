@@ -1,0 +1,13 @@
+[
+    {
+        "_id": "xxm-activity-banner-id-1",
+        "appid": "",
+        "checked": true,
+        "createTime": 1733323268033,
+        "picurl": "https://env-00jxhjzm8bqo.normal.cloudstatic.cn/wallpaper/20250108/1736311873967.webp",
+        "sort": 1,
+        "target": "self",
+        "url": "/pages/classlist/classlist?id=xxm-bizhi-classify-id-1&name=AI美图",
+        "user_id": "_uni_starter_test_user_id"
+    }
+]

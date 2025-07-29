@@ -1,0 +1,32 @@
+[
+    {
+        "_id": "xxm-bizhi-piclist-id-1",
+        "checked": true,
+        "classid": "xxm-bizhi-classify-id-1",
+        "createTime": 1732461323051,
+        "description": "description描述",
+        "picurl": "https://env-00jxhjzm8bqo.normal.cloudstatic.cn/wallpaper/20241225/1735119015902_0.webp",
+        "score": "5",
+        "tabs": [            
+            "AI美女",
+            "女神壁纸"
+        ],
+        "user_id": "_uni_starter_test_user_id",
+        "view_count": 82
+    },
+	{
+	    "_id": "xxm-bizhi-piclist-id-2",
+	    "checked": true,
+	    "classid": "xxm-bizhi-classify-id-2",
+	    "createTime": 1732461523051,
+	    "description": "description描述",
+	    "picurl": "https://env-00jxhjzm8bqo.normal.cloudstatic.cn/wallpaper/20250108/1736317643294_1.webp",
+	    "score": "5",
+	    "tabs": [            
+	        "可爱喵咪",
+	        "萌宠"
+	    ],
+	    "user_id": "_uni_starter_test_user_id",
+	    "view_count": 82
+	}
+]

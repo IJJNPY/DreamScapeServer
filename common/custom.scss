@@ -1,29 +1,30 @@
 view{
 	box-sizing: border-box;
 }
-
-.operate-btn-group{
+.operate-btn-group{	
 	display: flex;
 	justify-content: end;
-	gap: 15px;
+	gap:15px;
 	button{
-		margin: 0;
+		margin:0;
 	}
 }
-
 .paging{
-	padding: 20px 0 40px;
+	padding:20px 0 40px;
 }
 
 .switchStyle{
-	transform: scale(0.6); transform-origin: left center;
+	transform:scale(0.6);transform-origin: left center;
 }
 
 .popupBtnGroup{
 	display: flex;
 	justify-content: start;
+	gap: 20px;
 	button{
-		margin: 0 20px 0 0;
-		width: 130px;
+		margin:0;
+		width: 130px;			
 	}
 }
+
+

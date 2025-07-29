@@ -1,0 +1,60 @@
+{
+	"bsonType": "object",
+	"required": [
+		"name"
+	],
+	"permission": {
+		"read":  true,
+		"create":  "'manage' in auth.role",
+		"update": "'UPDATE_PERMISSION' in auth.permission || doc.user_id == auth.uid",
+		"delete": "'DELETE_PERMISSION' in auth.permission || doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID，系统自动生成"
+		},
+		"name": {
+			"bsonType": "string",
+			"description": "分类名称",
+			"label": "名称",
+			"trim": "both",
+			"minLength": 2,
+			"maxLength": 8
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "作者ID， 参考`uni-id-users` 表",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"select": {
+			"bsonType": "bool",
+			"description": "是否精选 默认false, true是精选",			
+			"defaultValue":false
+		},
+		"enable": {
+			"bsonType": "bool",
+			"description": "是否启用 默认false, true是启用",			
+			"defaultValue":false
+		},
+		"sort": {
+			"bsonType": "int",
+			"description": "类别显示顺序",
+			"label": "排序"
+		},
+		"picurl": {
+			"bsonType": "string",
+			"description": "缩略图地址"			
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	},
+	"version": "0.0.1"
+}

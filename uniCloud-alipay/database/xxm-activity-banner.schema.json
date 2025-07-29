@@ -1,0 +1,60 @@
+{
+	"bsonType": "object",
+	"required": [
+		"name"
+	],
+	"permission": {
+		"read": true,
+		"create": "'manage' in auth.role",
+		"update": "'UPDATE_PERMISSION' in auth.permission || doc.user_id == auth.uid",
+		"delete": "'UPDATE_PERMISSION' in auth.permission || doc.user_id == auth.uid"
+	},
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（文章 ID），系统自动生成"
+		},
+		"picurl": {
+			"bsonType": "string",
+			"description": "图片地址"			
+		},
+		"url": {
+			"bsonType": "string",
+			"description": "跳转地址"			
+		},		
+		"sort": {
+			"bsonType": "int",
+			"description": "类别显示顺序",
+			"defaultValue":"0"
+		},
+		"checked":{
+			"bsonType": "bool",
+			"description": "是否可见",
+			"defaultValue":true  //true可见 false隐藏			
+		},
+		"target": {
+			"bsonType": "string",
+			"description": "跳转类型" ,//默认self站内 miniProgram站外
+			"defaultValue":"self"
+		},
+		"appid": {
+			"bsonType": "string",
+			"description": "外站appid"			
+		},
+		"user_id": {
+			"bsonType": "string",
+			"description": "作者ID， 参考`uni-id-users` 表",
+			"foreignKey": "uni-id-users._id",
+			"defaultValue": {
+				"$env": "uid"
+			}
+		},
+		"createTime": {
+			"bsonType": "timestamp",
+			"description": "创建时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	},
+	"version": "0.0.1"
+}

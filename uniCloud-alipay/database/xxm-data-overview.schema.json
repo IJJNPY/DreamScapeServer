@@ -1,0 +1,62 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": "auth.uid != null || 'READ_PERMISSION' in auth.permission",
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"day":{
+			"description": "日期",
+			"bsonType": "string"
+		},
+		"downloadCount":{
+			"description": "下载数",
+			"bsonType": "int",
+			"defaultValue":0
+		},
+		"scoreCount":{
+			"description": "评分数",
+			"bsonType": "int",
+			"defaultValue":0
+		},
+		"userCount":{
+			"description": "用户数",
+			"bsonType": "int",
+			"defaultValue":0
+		},
+		"usageCount":{
+			"description": "调用数",
+			"bsonType": "int",
+			"defaultValue":0
+		},
+		"coinCount":{
+			"description": "硬币数",
+			"bsonType": "int",
+			"defaultValue":0
+		},
+		"uploadCount":{
+			"description": "上传数",
+			"bsonType": "int",
+			"defaultValue":0
+		},
+		"record":{
+			"description": "时刻记录",
+			"bsonType": "array",
+			"defaultValue":[]
+		},
+		"createTime":{
+			"description": "创建时间",
+			"bsonType": "timestamp",
+			"defaultValue":{
+				"$env": "now"
+			}
+		}
+	}
+}

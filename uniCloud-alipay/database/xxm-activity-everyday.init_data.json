@@ -1,0 +1,17 @@
+[
+    {
+        "_id": "xxm-activity-everyday-id-1",
+        "checked": true,
+        "createTime": 1733653403396,
+        "day": "2024-12-14",
+        "description": "测试每日推荐列表测试每日推荐列表测试每日推荐列表",
+        "picList": [
+            "xxm-bizhi-piclist-id-1",
+            "xxm-bizhi-piclist-id-2"            
+        ],
+        "theme": "测试每日推荐列表",
+        "type": 0,
+        "user_id": "_uni_starter_test_user_id",
+        "view_count": 100
+    }
+]
